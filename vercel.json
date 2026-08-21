@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "crons": [
+    { "path": "/api/cron/sweep-referral", "schedule": "0 */1 * * *" },
+    { "path": "/api/cron/sweep-agency", "schedule": "0 */4 * * *" },
+    { "path": "/api/cron/ytd-incremental", "schedule": "30 6 * * *" },
+    { "path": "/api/cron/reconcile-identity", "schedule": "0 6 * * *" },
+    { "path": "/api/cron/notify-drain", "schedule": "15 * * * *" }
+  ]
+}
