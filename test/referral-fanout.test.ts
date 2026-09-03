@@ -37,12 +37,12 @@ describe("fan-out dedupe keys", () => {
 
   test("a redelivery for ONE recruiter cannot collide with another's", () => {
     // The failure this prevents: Remy and Vic's DMs succeed, Marge's fails, the drain retries.
-    // With a shared key the retry re-sends to all three. With per-recruiter keys only Maggie's row
-    // is still pending, so only Maggie is retried.
-    const maggieFirst = dedupeKey({ ...base, recipient_recruiter_id: MARGE })
-    const maggieRetry = dedupeKey({ ...base, recipient_recruiter_id: MARGE })
-    expect(maggieRetry).toBe(maggieFirst)
-    expect(maggieRetry).not.toBe(dedupeKey({ ...base, recipient_recruiter_id: REMY }))
+    // With a shared key the retry re-sends to all three. With per-recruiter keys only Marge's row
+    // is still pending, so only Marge is retried.
+    const margeFirst = dedupeKey({ ...base, recipient_recruiter_id: MARGE })
+    const margeRetry = dedupeKey({ ...base, recipient_recruiter_id: MARGE })
+    expect(margeRetry).toBe(margeFirst)
+    expect(margeRetry).not.toBe(dedupeKey({ ...base, recipient_recruiter_id: REMY }))
   })
 
   test("head_of_ta mode keeps the original 3-part key byte-for-byte", () => {
