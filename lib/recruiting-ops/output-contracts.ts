@@ -166,7 +166,7 @@ export const concreteOutputContracts = [
     column("custody_status", "Custody status", "string"),
     column("review_required", "Review required", "boolean"),
   ]),
-  concreteContract("rahul_bora_sheet", "csv", "public_safe", [
+  concreteContract("rane_borg_sheet", "csv", "public_safe", [
     column("gate_id", "Gate ID", "string"),
     column("status", "Status", "string"),
     column("last_run_date", "Last run date", "date"),

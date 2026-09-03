@@ -32,8 +32,8 @@ const completeFacts: GreenhouseFinalOfferFact[] = [
     offerId: "offer_1",
     status: "accepted",
     createdAt: "2026-06-15T12:00:00.000Z",
-    // "Leah Thornton" is in the recruiter→team fixture config, so team/HOD resolve.
-    recruiterName: "Leah Thornton",
+    // "Lena Trask" is in the recruiter→team fixture config, so team/HOD resolve.
+    recruiterName: "Lena Trask",
     sourcerName: "Sourcer One",
   },
 ]
@@ -67,11 +67,11 @@ describe("T07 Final Offer module", () => {
         offer_status: "accepted",
         month_bucket: "2026-06",
         offer_created_at: "2026-06-15T12:00:00.000Z",
-        recruiter_name: "Leah Thornton",
+        recruiter_name: "Lena Trask",
         sourcer_name: "Sourcer One",
         // Derived through the shared recruiter→team dimension, not from a raw fact field.
-        team_name: "Team Leah",
-        hod_name: "Leah Thornton",
+        team_name: "Team Lena",
+        hod_name: "Lena Trask",
       },
     ])
   })

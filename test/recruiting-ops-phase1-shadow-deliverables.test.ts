@@ -109,7 +109,7 @@ describe("Phase 1 fixture-backed shadow deliverables", () => {
       greenhouseFacts: ownershipFacts(),
       ownershipScope: {
         recipientFingerprint: ownershipRecipientFingerprint,
-        teamName: "Team Leah",
+        teamName: "Team Lena",
       },
     })
 
@@ -118,7 +118,7 @@ describe("Phase 1 fixture-backed shadow deliverables", () => {
     expect(result.normalizedRows).toHaveLength(2)
     expect(result.run.publicSummary).toMatchObject({
       deliverableId: "role_assignment_sheet",
-      teamId: "team_leah",
+      teamId: "team_lena",
       jobRowCount: 1,
       recruiterRowCount: 1,
       totalOpenings: 2,
@@ -152,7 +152,7 @@ describe("Phase 1 fixture-backed shadow deliverables", () => {
       greenhouseFacts: staleFacts,
       ownershipScope: {
         recipientFingerprint: ownershipRecipientFingerprint,
-        teamName: "Team Leah",
+        teamName: "Team Lena",
       },
     })
     const freshness = result.gateEvaluation.gateResults.find((gate) => gate.gateId === "freshness")
@@ -238,7 +238,7 @@ describe("Phase 1 fixture-backed shadow deliverables", () => {
       greenhouseFacts: ownershipFacts(),
       ownershipScope: {
         recipientFingerprint: ownershipRecipientFingerprint,
-        teamName: "Team Leah",
+        teamName: "Team Lena",
       },
     })
 

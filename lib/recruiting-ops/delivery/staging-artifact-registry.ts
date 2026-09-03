@@ -156,7 +156,7 @@ export const stagingArtifactRegistry = [
     "delivery_roles_rps",
     "google_sheet",
     "1j9teESHnERTm1mmq7jDiI7qyZ3ygnzvaCbtLXdkzC3M",
-    "rahul_bora_sheet",
+    "rane_borg_sheet",
     "P5",
     "daily",
     "weekday_evening",

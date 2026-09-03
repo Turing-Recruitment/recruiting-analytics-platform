@@ -465,7 +465,7 @@ export const stagingSheetContracts: readonly StagingSheetRangeContract[] = [
     structuralNormalization: "Duplicate the latest dated tab for the reporting date and replace its title plus the complete A3:N daily report.",
     staticLayout: {
       titleCell: "A1",
-      titleTemplate: "Rahul Bora's Role Report - {DD MMM YYYY}",
+      titleTemplate: "Rane Borg's Role Report - {DD MMM YYYY}",
       mergeRanges: ["A1:N1"],
       labels: { A3: "Summary by Team" },
     },

@@ -108,7 +108,7 @@ describe("P3: a duplicate shadow delivery into the same ledger must be idempoten
       greenhouseFacts: facts,
       ownershipScope: {
         recipientFingerprint: createLocalPiiFingerprint("ownership_fixture_alpha", "test_recipient"),
-        teamName: "Team Leah",
+        teamName: "Team Lena",
       },
     }
 

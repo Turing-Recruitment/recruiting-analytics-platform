@@ -22,10 +22,10 @@ describe("governed dimensions (migration 018)", () => {
     expect(resolveTeam({ recruiterName: "Newly Hired" }, governedRoster).status).toBe("resolved")
     // ...and a name only the compiled config knows does NOT: the injected
     // roster replaces policy, it never merges with the fixture.
-    const compiledOnly = resolveTeam({ recruiterName: "Leah Thornton" }, governedRoster)
+    const compiledOnly = resolveTeam({ recruiterName: "Lena Trask" }, governedRoster)
     expect(compiledOnly.status).toBe("unresolved")
     // Without injection the compiled config still resolves it (test fixture path).
-    expect(resolveTeam({ recruiterName: "Leah Thornton" }).status).toBe("resolved")
+    expect(resolveTeam({ recruiterName: "Lena Trask" }).status).toBe("resolved")
   })
 
   test("modules thread the governed roster into team attribution", () => {

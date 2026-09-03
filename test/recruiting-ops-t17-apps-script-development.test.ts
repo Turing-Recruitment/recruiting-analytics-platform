@@ -61,9 +61,9 @@ const assetFacts: AppsScriptAssetCustodyFact[] = [
     capturedAt: "2026-06-25T02:02:00.000Z",
   },
   {
-    assetId: "rahul_bora_apps_script",
+    assetId: "rane_borg_apps_script",
     workflowId: "T10",
-    projectName: "Rahul Bora Control",
+    projectName: "Rane Borg Control",
     exportStatus: "reference_only",
     triggerStatus: "disabled",
     scopeStatus: "not_applicable",

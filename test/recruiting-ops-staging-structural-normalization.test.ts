@@ -1847,7 +1847,7 @@ describe("staging structural normalization plans", () => {
       newDatedSheetId: 2200000001,
       newDatedSheetIndex: 4,
       newDatedSheetTitle: "10 Jul 2026",
-      newDatedTitleValue: "Rahul Bora's Role Report - 10 Jul 2026",
+      newDatedTitleValue: "Rane Borg's Role Report - 10 Jul 2026",
     })
 
     expect(spec).toMatchObject({
@@ -1867,7 +1867,7 @@ describe("staging structural normalization plans", () => {
           sheetId: 2200000001,
           sheetTitle: "10 Jul 2026",
           staticLayout: {
-            titleValue: "Rahul Bora's Role Report - 10 Jul 2026",
+            titleValue: "Rane Borg's Role Report - 10 Jul 2026",
             headers: ["Team", "Total RPS", "Match", "Mismatch", "Strong Yes", "Yes", "No", "Other"],
           },
         },

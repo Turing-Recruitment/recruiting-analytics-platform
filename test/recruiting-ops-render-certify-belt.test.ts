@@ -18,7 +18,7 @@ import { renderCsvArtifact } from "../lib/recruiting-ops/renderers/csv"
 import { renderJsonArtifact } from "../lib/recruiting-ops/renderers/json"
 
 const rows: ReadonlyArray<Record<string, unknown>> = [
-  { job_id: "job_1", owner: "Leah Thornton", scorecard_status: "missing" },
+  { job_id: "job_1", owner: "Lena Trask", scorecard_status: "missing" },
 ]
 
 const baseInput = {

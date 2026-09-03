@@ -39,7 +39,7 @@ per-artifact `RECOPS_HYDRATE_*` switches — all of which default off. The full
 list is in `env.example`.
 
 Two values are compiled in rather than configured, on purpose. The head-of-TA
-Slack id (`U07RJJ6RLN6`) lives in `lib/sweep-config.ts` because alert routing
+Slack id (`U07SYNTH0TA`) lives in `lib/sweep-config.ts` because alert routing
 must not vary by environment, and the referral-report recipient gate in
 `lib/recruiting-ops/employee-referral-report-runner.ts` hard-codes `@turing.com`
 because those reports carry pre-payroll compensation data.

@@ -19,12 +19,12 @@ export const SWEEP_CONFIG = {
     actionDeadlineDays: 7,
   },
   slack: {
-    headOfTaUserId: "U07RJJ6RLN6",
+    headOfTaUserId: "U07SYNTH0TA",
     // Who hears about the weekly recruiting-artifact runs. The same person as
     // headOfTaUserId today, kept separate because the two answer different
     // questions — one routes candidate SLA alerts, this one routes "did the
     // reports update" — and either can move without dragging the other along.
-    recruitingOpsAlertUserId: "U07RJJ6RLN6",
+    recruitingOpsAlertUserId: "U07SYNTH0TA",
   },
   // Removed 2026-05-28: `nonAgencySourceTypes` (the "inverted filter" allowlist)
   // had zero readers repo-wide — agency identification now runs through the

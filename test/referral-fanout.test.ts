@@ -7,8 +7,8 @@ import { resolveRecipient, recruiterRoutingFromMs } from "../lib/notification-de
 //
 // A referral landing on a requisition is news for EVERY recruiter on that req's hiring team, so
 // recruiter mode emits one DM per recruiter. Live shape from req 1206 (AI Engineering Lead, NY):
-// Greenhouse lists Rahul Panwar, Victor Carmona and Maggie Johnson all as Recruiters. The
-// "(Recruiting tasks)" marker on Rahul is a default task-assignment flag, not a claim that the
+// Greenhouse lists Remy Park, Vic Cole and Marge Jensen all as Recruiters. The
+// "(Recruiting tasks)" marker on Remy is a default task-assignment flag, not a claim that the
 // other two are uninvolved — an earlier version of this system read it that way and routed
 // everything to one person.
 //
@@ -16,49 +16,49 @@ import { resolveRecipient, recruiterRoutingFromMs } from "../lib/notification-de
 // outbox is built on "never send the same thing twice"; fan-out is the first feature that could
 // break it, because three recipients behind one row means a single failure retries all three.
 
-const RAHUL = 4203738004
-const VICTOR = 5101879004
-const MAGGIE = 5103434004
+const REMY = 4200000001
+const VIC = 4200000002
+const MARGE = 4200000003
 
-const base = { channel: "referral" as const, application_id: 170617746, reason: "sla_alerted" as const }
+const base = { channel: "referral" as const, application_id: 170000001, reason: "sla_alerted" as const }
 
 describe("fan-out dedupe keys", () => {
   test("each recruiter on the req gets a distinct key, so each send is retried independently", () => {
-    const keys = [RAHUL, VICTOR, MAGGIE].map((id) =>
+    const keys = [REMY, VIC, MARGE].map((id) =>
       dedupeKey({ ...base, recipient_recruiter_id: id })
     )
     expect(new Set(keys).size).toBe(3)
     expect(keys).toEqual([
-      "referral:170617746:sla_alerted:4203738004",
-      "referral:170617746:sla_alerted:5101879004",
-      "referral:170617746:sla_alerted:5103434004",
+      "referral:170000001:sla_alerted:4200000001",
+      "referral:170000001:sla_alerted:4200000002",
+      "referral:170000001:sla_alerted:4200000003",
     ])
   })
 
   test("a redelivery for ONE recruiter cannot collide with another's", () => {
-    // The failure this prevents: Rahul and Victor's DMs succeed, Maggie's fails, the drain retries.
+    // The failure this prevents: Remy and Vic's DMs succeed, Marge's fails, the drain retries.
     // With a shared key the retry re-sends to all three. With per-recruiter keys only Maggie's row
     // is still pending, so only Maggie is retried.
-    const maggieFirst = dedupeKey({ ...base, recipient_recruiter_id: MAGGIE })
-    const maggieRetry = dedupeKey({ ...base, recipient_recruiter_id: MAGGIE })
+    const maggieFirst = dedupeKey({ ...base, recipient_recruiter_id: MARGE })
+    const maggieRetry = dedupeKey({ ...base, recipient_recruiter_id: MARGE })
     expect(maggieRetry).toBe(maggieFirst)
-    expect(maggieRetry).not.toBe(dedupeKey({ ...base, recipient_recruiter_id: RAHUL }))
+    expect(maggieRetry).not.toBe(dedupeKey({ ...base, recipient_recruiter_id: REMY }))
   })
 
   test("head_of_ta mode keeps the original 3-part key byte-for-byte", () => {
     // Pre-fan-out rows must not churn. Anything else re-enqueues the entire live backlog.
-    expect(dedupeKey(base)).toBe("referral:170617746:sla_alerted")
+    expect(dedupeKey(base)).toBe("referral:170000001:sla_alerted")
     expect(dedupeKey({ ...base, recipient_recruiter_id: null })).toBe(
-      "referral:170617746:sla_alerted"
+      "referral:170000001:sla_alerted"
     )
     expect(dedupeKey({ ...base, recipient_recruiter_id: undefined })).toBe(
-      "referral:170617746:sla_alerted"
+      "referral:170000001:sla_alerted"
     )
   })
 
   test("the tier still segments the key, so a 36h reminder is a separate send", () => {
-    expect(dedupeKey({ ...base, reason: "sla_risk", recipient_recruiter_id: RAHUL })).not.toBe(
-      dedupeKey({ ...base, recipient_recruiter_id: RAHUL })
+    expect(dedupeKey({ ...base, reason: "sla_risk", recipient_recruiter_id: REMY })).not.toBe(
+      dedupeKey({ ...base, recipient_recruiter_id: REMY })
     )
   })
 })
@@ -74,11 +74,11 @@ describe("resolveRecipient under fan-out", () => {
     vi.stubEnv("NOTIFY_RECIPIENT_MODE", "recruiter")
     vi.stubEnv("NOTIFY_RECRUITER_ROUTING_FROM", "2020-01-01T00:00:00Z")
     const r = resolveRecipient({
-      recruiterId: VICTOR,
-      recruiterSlackId: "U085FQSKT0D",
+      recruiterId: VIC,
+      recruiterSlackId: "U08SYNTH0R2",
       recruiterCount: 3,
     })
-    expect(r.recipient_user_id).toBe("U085FQSKT0D")
+    expect(r.recipient_user_id).toBe("U08SYNTH0R2")
     expect(r.recipient_resolution_status).toBe("resolved")
   })
 
@@ -88,14 +88,14 @@ describe("resolveRecipient under fan-out", () => {
     vi.stubEnv("NOTIFY_RECIPIENT_MODE", "recruiter")
     vi.stubEnv("NOTIFY_RECRUITER_ROUTING_FROM", "2020-01-01T00:00:00Z")
     const r = resolveRecipient({ recruiterId: 999, recruiterSlackId: null, recruiterCount: 1 })
-    expect(r.recipient_user_id).toBe("U07RJJ6RLN6")
+    expect(r.recipient_user_id).toBe("U07SYNTH0TA")
     expect(r.recipient_resolution_status).toBe("unresolved")
   })
 
   test("head_of_ta mode ignores the recruiter entirely", () => {
     vi.stubEnv("NOTIFY_RECIPIENT_MODE", "head_of_ta")
-    const r = resolveRecipient({ recruiterId: RAHUL, recruiterSlackId: "U02LFLZJXJ7", recruiterCount: 3 })
-    expect(r.recipient_user_id).toBe("U07RJJ6RLN6")
+    const r = resolveRecipient({ recruiterId: REMY, recruiterSlackId: "U02SYNTH0R1", recruiterCount: 3 })
+    expect(r.recipient_user_id).toBe("U07SYNTH0TA")
   })
 })
 
@@ -112,11 +112,11 @@ describe("no recruiter may receive a pre-switch-on alert (Sam, binding)", () => 
   test("recruiter mode WITHOUT a start line falls back to head-of-TA — the unsafe state cannot exist", () => {
     vi.stubEnv("NOTIFY_RECIPIENT_MODE", "recruiter")
     // NOTIFY_RECRUITER_ROUTING_FROM deliberately unset.
-    const r = resolveRecipient({ recruiterId: RAHUL, recruiterSlackId: "U02LFLZJXJ7", recruiterCount: 3 })
+    const r = resolveRecipient({ recruiterId: REMY, recruiterSlackId: "U02SYNTH0R1", recruiterCount: 3 })
     expect(
       r.recipient_user_id,
       "flipping the mode alone must NOT start DMing recruiters"
-    ).toBe("U07RJJ6RLN6")
+    ).toBe("U07SYNTH0TA")
   })
 
   test("an unparseable start line is treated as absent, not as the epoch", () => {
@@ -124,16 +124,16 @@ describe("no recruiter may receive a pre-switch-on alert (Sam, binding)", () => 
     // ever raised AFTER the start line and release the whole backlog.
     vi.stubEnv("NOTIFY_RECIPIENT_MODE", "recruiter")
     vi.stubEnv("NOTIFY_RECRUITER_ROUTING_FROM", "not-a-timestamp")
-    const r = resolveRecipient({ recruiterId: RAHUL, recruiterSlackId: "U02LFLZJXJ7", recruiterCount: 3 })
-    expect(r.recipient_user_id).toBe("U07RJJ6RLN6")
+    const r = resolveRecipient({ recruiterId: REMY, recruiterSlackId: "U02SYNTH0R1", recruiterCount: 3 })
+    expect(r.recipient_user_id).toBe("U07SYNTH0TA")
   })
 
   test("a start line in the future keeps everything on the head-of-TA", () => {
     vi.stubEnv("NOTIFY_RECIPIENT_MODE", "recruiter")
     vi.stubEnv("NOTIFY_RECRUITER_ROUTING_FROM", "2999-01-01T00:00:00Z")
     // The mode IS active (the instant parses), so routing itself works...
-    const r = resolveRecipient({ recruiterId: RAHUL, recruiterSlackId: "U02LFLZJXJ7", recruiterCount: 3 })
-    expect(r.recipient_user_id).toBe("U02LFLZJXJ7")
+    const r = resolveRecipient({ recruiterId: REMY, recruiterSlackId: "U02SYNTH0R1", recruiterCount: 3 })
+    expect(r.recipient_user_id).toBe("U02SYNTH0R1")
     // ...but predatesRecruiterRouting suppresses every alert at enqueue, which is the enqueue-side
     // half of the guarantee and is exercised through enqueuePending in notification-delivery.test.
     expect(recruiterRoutingFromMs()).toBeGreaterThan(Date.now())

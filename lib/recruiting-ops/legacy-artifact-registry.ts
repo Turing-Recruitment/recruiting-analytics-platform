@@ -75,12 +75,12 @@ export const legacyArtifactRegistry = [
     ["all_hires_sheet"]
   ),
   legacyDormantReportArtifact(
-    "legacy_q15_rahul_bora_daily_report",
-    "Q15 Rahul Bora dormant daily report",
+    "legacy_q15_rane_borg_daily_report",
+    "Q15 Rane Borg dormant daily report",
     ["T10"],
     ["Q15"],
-    ["rahul_bora_apps_script"],
-    ["rahul_bora_sheet"]
+    ["rane_borg_apps_script"],
+    ["rane_borg_sheet"]
   ),
   legacySheetArtifact(
     "legacy_rc_tracker_sheet",
@@ -119,7 +119,7 @@ export const legacyArtifactRegistry = [
     "legacy_apps_script_asset_registry",
     "Legacy Apps Script asset registry",
     ["T17"],
-    ["weekly_recruitment_apps_script", "role_pipeline_apps_script", "all_hires_apps_script", "rahul_bora_apps_script"],
+    ["weekly_recruitment_apps_script", "role_pipeline_apps_script", "all_hires_apps_script", "rane_borg_apps_script"],
     ["apps_script_asset_registry"]
   ),
   legacySlackPatternArtifact(

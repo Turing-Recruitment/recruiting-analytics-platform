@@ -58,7 +58,7 @@ export const legacyArtifactDisplayV1: readonly LegacyArtifactDisplayEntry[] = [
  * can adopt broader scope without rewriting source semantics.
  */
 export const legacyFinalOfferParityV1 = {
-  excludedApplicationRecruiterNames: ["Vinal Mishra"],
+  excludedApplicationRecruiterNames: ["Val Moss"],
   excludedJobNames: [
     "Campus 2025 Hires",
     "Final Campus 2025 Hires",
@@ -68,15 +68,15 @@ export const legacyFinalOfferParityV1 = {
   excludedOfferStatuses: ["deprecated"],
   excludedRejectionReasonNames: ["Duplicate"],
   departmentHods: [
-    ...["Finance & Accounting", "Accounting & Tax", "Business Systems", "FP&A"].map((departmentName) => ({ departmentName, hodName: "Alok Bhushan" })),
-    ...["R&D / Engineering", "Product", "UltraLab", "Data Science"].map((departmentName) => ({ departmentName, hodName: "Anshul Bhagi" })),
-    { departmentName: "Legal", hodName: "Catherine Lacavera" },
-    ...["People", "Facilities", "Recruiting"].map((departmentName) => ({ departmentName, hodName: "Eric Kolovson" })),
-    ...["Marketplace", "Fulfillment StratOps", "Talent Ops"].map((departmentName) => ({ departmentName, hodName: "Nishad Acharya" })),
-    ...["IT", "Security"].map((departmentName) => ({ departmentName, hodName: "Paul Black" })),
-    ...["Delivery", "Production Engineering"].map((departmentName) => ({ departmentName, hodName: "Rahul Bora" })),
-    { departmentName: "Sales", hodName: "Robin Bordoli" },
-    ...["Marketing", "Brand Marketing", "Demand Generation"].map((departmentName) => ({ departmentName, hodName: "Jonathan Siddharth" })),
+    ...["Finance & Accounting", "Accounting & Tax", "Business Systems", "FP&A"].map((departmentName) => ({ departmentName, hodName: "Avery Banks" })),
+    ...["R&D / Engineering", "Product", "UltraLab", "Data Science"].map((departmentName) => ({ departmentName, hodName: "Ansel Byrd" })),
+    { departmentName: "Legal", hodName: "Cate Lark" },
+    ...["People", "Facilities", "Recruiting"].map((departmentName) => ({ departmentName, hodName: "Erik Kole" })),
+    ...["Marketplace", "Fulfillment StratOps", "Talent Ops"].map((departmentName) => ({ departmentName, hodName: "Nash Acre" })),
+    ...["IT", "Security"].map((departmentName) => ({ departmentName, hodName: "Pol Blake" })),
+    ...["Delivery", "Production Engineering"].map((departmentName) => ({ departmentName, hodName: "Rane Borg" })),
+    { departmentName: "Sales", hodName: "Roan Bard" },
+    ...["Marketing", "Brand Marketing", "Demand Generation"].map((departmentName) => ({ departmentName, hodName: "Joss Marsh" })),
   ],
 } as const
 

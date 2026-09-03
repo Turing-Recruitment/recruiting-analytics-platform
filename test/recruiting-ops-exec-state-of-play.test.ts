@@ -25,7 +25,7 @@ function tempRoot(): string {
 
 const NOW_MS = Date.parse("2026-07-06T12:00:00.000Z")
 const NO_GOVERNED = buildGovernedFunnelMap([])
-const ROSTER = [{ recruiterName: "Kanika Pandey", teamId: "team_a", teamName: "Team A", hodName: "HOD" }]
+const ROSTER = [{ recruiterName: "Kendra Pace", teamId: "team_a", teamName: "Team A", hodName: "HOD" }]
 
 function daysAgoIso(days: number): string {
   return new Date(NOW_MS - days * 86_400_000).toISOString()
@@ -33,7 +33,7 @@ function daysAgoIso(days: number): string {
 
 /**
  * Fixture org: two open jobs.
- *  - job 1 "Senior Engineer" (req 101): owner Kanika (roster), 2 seats, one
+ *  - job 1 "Senior Engineer" (req 101): owner Kendra (roster), 2 seats, one
  *    onsite candidate + one application-review candidate + one unknown-stage
  *    candidate; a complete scorecard 3 days ago (RPS kit) and one 10 days ago;
  *    one awaiting-feedback interview; a stage advance 2 days ago.
@@ -64,7 +64,7 @@ function fixtureSources(): HarvestExecStateSources {
       { id: 72, job_id: 1, user_id: 502, type: "sourcer" },
     ],
     users: [
-      { id: 501, first_name: "Kanika", last_name: "Pandey" },
+      { id: 501, first_name: "Kendra", last_name: "Pace" },
       { id: 502, first_name: "Some", last_name: "Sourcer" },
     ],
     applications: [
@@ -185,7 +185,7 @@ describe("deriveExecState", () => {
     const { bundle } = derive()
     const senior = bundle.rows.find((row) => row.req_id === 101)!
     expect(senior.seats).toBe(2) // the closed opening does not count
-    expect(senior.owner).toBe("Kanika Pandey")
+    expect(senior.owner).toBe("Kendra Pace")
     expect(senior.owner_kind).toBe("recruiter") // recruiter wins over sourcer
     expect(senior.owner_on_roster).toBe(true)
     expect(senior.engaged_depth).toBe(2) // onsite + RPS candidates
@@ -276,7 +276,7 @@ describe("deriveExecState", () => {
 
   test("off-roster owners emit a gap", () => {
     const { sourceGaps } = derive({ roster: [{ recruiterName: "Somebody Else", teamId: "t", teamName: "T", hodName: "H" }] })
-    expect(sourceGaps.some((gap) => gap.reason.includes('"Kanika Pandey" is not on the active governed roster'))).toBe(true)
+    expect(sourceGaps.some((gap) => gap.reason.includes('"Kendra Pace" is not on the active governed roster'))).toBe(true)
   })
 
   test("rollup momentum distribution counts every row", () => {

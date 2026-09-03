@@ -36,31 +36,31 @@ describe("PII fingerprint salt provenance", () => {
 
   test("live provenance without the env salt fails closed", () => {
     expect(() =>
-      createPiiFingerprint("Leah Thornton", { context: "test_recipient", dataProvenance: "live" })
+      createPiiFingerprint("Lena Trask", { context: "test_recipient", dataProvenance: "live" })
     ).toThrow("RECOPS_PII_FINGERPRINT_SALT")
   })
 
   test("live provenance with a blank env salt still fails closed", () => {
     process.env[PII_FINGERPRINT_SALT_ENV] = "   "
     expect(() =>
-      createPiiFingerprint("Leah Thornton", { context: "test_recipient", dataProvenance: "live" })
+      createPiiFingerprint("Lena Trask", { context: "test_recipient", dataProvenance: "live" })
     ).toThrow("RECOPS_PII_FINGERPRINT_SALT")
   })
 
   test("live provenance uses the env salt, never the committed key", () => {
     process.env[PII_FINGERPRINT_SALT_ENV] = "env-injected-secret-for-test"
-    const live = createPiiFingerprint("Leah Thornton", {
+    const live = createPiiFingerprint("Lena Trask", {
       context: "test_recipient",
       dataProvenance: "live",
     })
     expect(live).toBe(
-      createPseudonymousFingerprint("Leah Thornton", {
+      createPseudonymousFingerprint("Lena Trask", {
         key: "env-injected-secret-for-test",
         context: "test_recipient",
       })
     )
     expect(live).not.toBe(
-      createPseudonymousFingerprint("Leah Thornton", {
+      createPseudonymousFingerprint("Lena Trask", {
         key: LOCAL_ONLY_PII_FINGERPRINT_KEY,
         context: "test_recipient",
       })

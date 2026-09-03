@@ -432,7 +432,7 @@ function renderDeliveryDatedSummary(
     contractId: "delivery_rps_dated",
     sheetTitle: dateToken,
     titleCell: "A1",
-    titleValue: `Rahul Bora's Role Report - ${dateToken}`,
+    titleValue: `Rane Borg's Role Report - ${dateToken}`,
     mergeRanges: ["A1:N1"],
     sectionLabelCell: "A3",
     sectionLabel: "Summary by Team",

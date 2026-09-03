@@ -179,10 +179,10 @@ describe("reconcile cron — a below-floor row is upgraded by proxy evidence", (
   // row as an AMBIGUOUS owner set (two recruiter owners, no responsible flag, no app recruiter)
   // — the PASS-1 write-time resolve left it below the floor. The mocked attempts table holds a
   // prior attempt (attempt_number 2) so the upgrade's attempt row must bump to 3.
-  const ambiguousOwners: OwnerRow[] = [owner({ user_id: 4381126004 }), owner({ user_id: 5103434004 })]
+  const ambiguousOwners: OwnerRow[] = [owner({ user_id: 4381126004 }), owner({ user_id: 4200000003 })]
   const ownerUsers = users([
     [4381126004, "Avery First"],
-    [5103434004, "Riley Scorer"],
+    [4200000003, "Riley Scorer"],
   ])
 
   test("ambiguous owner set is below the reconcile floor (so it is due for the proxy pass)", async () => {
@@ -208,7 +208,7 @@ describe("reconcile cron — a below-floor row is upgraded by proxy evidence", (
     // The resolver's R4 rung (identity-resolver.ts:355-377) picks that owner -> inferred.
     const f = fetchers({
       scorecardsByApp: new Map([
-        [9001, [scorecard({ application_id: 9001, submitter_id: 5103434004 })]],
+        [9001, [scorecard({ application_id: 9001, submitter_id: 4200000003 })]],
       ]),
     })
 
@@ -226,7 +226,7 @@ describe("reconcile cron — a below-floor row is upgraded by proxy evidence", (
     // The defect is upgraded: a real winner is chosen by proxy evidence, NOT first-owner-wins.
     expect(after.status).toBe("resolved")
     expect(after.confidence).toBe("inferred")
-    expect(after.primary_recruiter_id).toBe(5103434004)
+    expect(after.primary_recruiter_id).toBe(4200000003)
     expect(after.primary_recruiter_name).toBe("Riley Scorer")
     expect(after.evidence_types).toContain("scorecard")
     expect(after.ambiguous_candidate_ids).toEqual([])
@@ -261,9 +261,9 @@ describe("reconcile cron — a below-floor row is upgraded by proxy evidence", (
             candidateId: 701,
             applicationReviewExitedAt: "2026-05-11T00:00:00Z",
             activityAuthors: [
-              { noteId: 1, userId: 5103434004, createdAt: "2026-05-11T01:00:00Z", deltaMs: 3600000 },
+              { noteId: 1, userId: 4200000003, createdAt: "2026-05-11T01:00:00Z", deltaMs: 3600000 },
             ],
-            actorUserId: 5103434004,
+            actorUserId: 4200000003,
           }),
         ],
       ]),
@@ -282,7 +282,7 @@ describe("reconcile cron — a below-floor row is upgraded by proxy evidence", (
 
     expect(after.status).toBe("resolved")
     expect(after.confidence).toBe("inferred")
-    expect(after.primary_recruiter_id).toBe(5103434004)
+    expect(after.primary_recruiter_id).toBe(4200000003)
     expect(after.evidence_types).toContain("note_activity")
     expect(f.fetchStageChangeActors).toHaveBeenCalled()
   })
@@ -321,10 +321,10 @@ describe("reconcile cron — an unresolved row records an attempt with backoff",
   // filter). The resolution stays an ambiguous DEFECT — NULL identity, no sentinel string — and
   // the route records an attempt row with an exponential-backoff next_retry_at (route.ts:304-310,
   // :923-943). This is the half of the cron the W1 suite never covered.
-  const ambiguousOwners: OwnerRow[] = [owner({ user_id: 4381126004 }), owner({ user_id: 5103434004 })]
+  const ambiguousOwners: OwnerRow[] = [owner({ user_id: 4381126004 }), owner({ user_id: 4200000003 })]
   const ownerUsers = users([
     [4381126004, "Avery First"],
-    [5103434004, "Riley Second"],
+    [4200000003, "Riley Second"],
   ])
 
   test("proxy evidence at a non-owner leaves the defect unresolved (NULL identity, no sentinel)", async () => {
@@ -366,7 +366,7 @@ describe("reconcile cron — an unresolved row records an attempt with backoff",
     // Canon: never the literal sentinel — the defect carries the contended owner set instead.
     expect(res.primary_recruiter_name).not.toBe("Unknown")
     expect(res.ambiguous_candidate_ids).toEqual(
-      expect.arrayContaining([4381126004, 5103434004])
+      expect.arrayContaining([4381126004, 4200000003])
     )
     // Still below the floor after the proxy pass -> stays in the reconcile queue.
     expect(belowFloor(res.confidence)).toBe(true)

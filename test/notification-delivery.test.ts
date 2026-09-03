@@ -692,7 +692,7 @@ describe("enqueuePending — idempotent on dedupe_key", () => {
         {
           application_id: 5002,
           primary_recruiter_id: 4381126004,
-          primary_recruiter_name: "Leah Thornton",
+          primary_recruiter_name: "Lena Trask",
           recruiter_ids: [4381126004],
         },
       ])
@@ -708,7 +708,7 @@ describe("enqueuePending — idempotent on dedupe_key", () => {
         recruiter_count: number | null
       }
     }>
-    expect(rows[0].payload.recruiter_owner_name).toBe("Leah Thornton")
+    expect(rows[0].payload.recruiter_owner_name).toBe("Lena Trask")
     expect(rows[0].payload.recruiter_id).toBe(4381126004)
     expect(rows[0].payload.recruiter_count).toBe(1)
   })
@@ -906,7 +906,7 @@ describe("drain — gate ON sends and records provider_message_id", () => {
     expect(result.suppressed).toBe(0)
     const attempt = attemptInsert()
     expect(attempt!.status).toBe("sent")
-    expect(attempt!.recipient_user_id).toBe("U07RJJ6RLN6") // real config head-of-TA fallback
+    expect(attempt!.recipient_user_id).toBe("U07SYNTH0TA") // real config head-of-TA fallback
     expect(fetchSpy).toHaveBeenCalledTimes(2)
   })
 

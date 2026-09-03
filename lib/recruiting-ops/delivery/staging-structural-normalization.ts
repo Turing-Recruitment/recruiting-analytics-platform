@@ -2035,7 +2035,7 @@ export function deliveryRpsNormalizationSpec(input: {
         grid: { rowCount: 1000, columnCount: 26 },
         staticLayout: {
           ...layout,
-          titleValue: "Rahul Bora's Role Report - 09 Jul 2026",
+          titleValue: "Rane Borg's Role Report - 09 Jul 2026",
         },
       },
       targetSheetAbsent: { sheetId: newDatedSheetId, sheetTitle: newDatedSheetTitle },
@@ -2821,7 +2821,7 @@ function deliveryRpsDatedLayout(sheetTitle: string) {
   return {
     frozenRowCount: 1,
     titleCell: "A1",
-    titleValue: `Rahul Bora's Role Report - ${sheetTitle}`,
+    titleValue: `Rane Borg's Role Report - ${sheetTitle}`,
     mergedRange: "A1:N1",
     sectionLabel: { cell: "A3", value: "Summary by Team" },
     headerRange: "A4:H4",

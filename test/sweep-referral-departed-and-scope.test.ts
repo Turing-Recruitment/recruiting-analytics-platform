@@ -10,7 +10,7 @@
 //
 // (2) DEPARTED OWNERS — a deactivated Greenhouse user still seated as a Recruiter kept the
 //     fan-out addressing DMs to someone who had left; unreachable recipients fall back to the
-//     head-of-TA, so those copies landed on Sam (Aaliya Naz, 3 sends / 2 applications).
+//     head-of-TA, so those copies landed on Sam (Alia North, 3 sends / 2 applications).
 //     /v3/users carries `deactivated` and the sweep ALREADY fetches it for name resolution —
 //     it was simply never consulted. Sam's rule (2026-08-14): if someone has departed, no
 //     message should be sent for them at all.

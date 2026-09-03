@@ -13,12 +13,12 @@ const SENTINELS = ["unmapped", "Unknown", "UNASSIGNED", "Unknown Agency"]
 
 describe("recruiter → team → HOD resolution", () => {
   test("resolves a known recruiter to a confirmed team and HOD", () => {
-    const result = resolveTeam({ recruiterName: "Leah Thornton" })
+    const result = resolveTeam({ recruiterName: "Lena Trask" })
     expect(result.status).toBe("resolved")
     expect(result.confidence).toBe("confirmed")
-    expect(result.team_id).toBe("team_leah")
-    expect(result.team_name).toBe("Team Leah")
-    expect(result.hod_name).toBe("Leah Thornton")
+    expect(result.team_id).toBe("team_lena")
+    expect(result.team_name).toBe("Team Lena")
+    expect(result.hod_name).toBe("Lena Trask")
     expect(result.evidence).toContain("v1")
   })
 

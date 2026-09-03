@@ -483,8 +483,8 @@ function buildConsoleLocalRunCatalog(generatedAt: string): LocalRunCatalog {
     recipientFingerprint: createLocalPiiFingerprint("ownership_fixture_alpha", "console_recipient"),
     recipientScopeRuleId: "team_scoped_visibility",
     normalizedRows: [
-      { view_type: "job", job_id: "job_fixture_1", recruiter_name: "Leah Thornton", pod_name: "Team Leah", openings_count: 2 },
-      { view_type: "recruiter", recruiter_name: "Leah Thornton", pod_name: "Team Leah", openings_count: 2 },
+      { view_type: "job", job_id: "job_fixture_1", recruiter_name: "Lena Trask", pod_name: "Team Lena", openings_count: 2 },
+      { view_type: "recruiter", recruiter_name: "Lena Trask", pod_name: "Team Lena", openings_count: 2 },
     ],
     sourceGaps: [],
     publicSummary: {
@@ -524,8 +524,8 @@ function buildConsoleLocalRunCatalog(generatedAt: string): LocalRunCatalog {
     createdAt: "2026-06-24T14:02:00.000Z",
     proposedPayload: {
       field: "recruiter",
-      ownerEmail: "leah@example.com",
-      ownerLabel: "Leah Thornton",
+      ownerEmail: "lena@example.com",
+      ownerLabel: "Lena Trask",
     },
   })
 

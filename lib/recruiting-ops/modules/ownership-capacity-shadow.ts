@@ -79,7 +79,7 @@ export async function runOwnershipCapacityShadow(
       label: "Fixture-backed Greenhouse-style ownership facts scoped to ownership capacity shadow output.",
     },
   ]
-  // Team display labels are person-derived ("Team Leah"); public summaries carry the
+  // Team display labels are person-derived ("Team Lena"); public summaries carry the
   // config teamId slug instead (P1 value-driven redaction made the label a violation).
   const scopeTeamId = teamIdForTeamName(input.ownershipScope.teamName)
   const publicSummary = {

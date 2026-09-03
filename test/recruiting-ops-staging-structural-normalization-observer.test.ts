@@ -149,7 +149,7 @@ describe("staging structural normalization snapshot bridge", () => {
       newDatedSheetId: 2200000001,
       newDatedSheetIndex: 4,
       newDatedSheetTitle: "10 Jul 2026",
-      newDatedTitleValue: "Rahul Bora's Role Report - 10 Jul 2026",
+      newDatedTitleValue: "Rane Borg's Role Report - 10 Jul 2026",
     })
     cases.push({ spec: delivery, snapshots: deliverySnapshots(delivery) })
 
@@ -700,7 +700,7 @@ describe("staging structural normalization snapshot bridge", () => {
         newDatedSheetId: 2200000001,
         newDatedSheetIndex: 4,
         newDatedSheetTitle: "10 Jul 2026",
-        newDatedTitleValue: "Rahul Bora's Role Report - 10 Jul 2026",
+        newDatedTitleValue: "Rane Borg's Role Report - 10 Jul 2026",
       })
     )
     expect(delivery).toHaveLength(7)
@@ -835,7 +835,7 @@ describe("staging structural normalization snapshot bridge", () => {
       newDatedSheetId: 2200000001,
       newDatedSheetIndex: 4,
       newDatedSheetTitle: "10 Jul 2026",
-      newDatedTitleValue: "Rahul Bora's Role Report - 10 Jul 2026",
+      newDatedTitleValue: "Rane Borg's Role Report - 10 Jul 2026",
     })
     const snapshots = deliverySnapshots(spec)
     const driftedAfter = structuredClone(snapshots.after)

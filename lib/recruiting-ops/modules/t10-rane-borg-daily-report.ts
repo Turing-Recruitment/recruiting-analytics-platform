@@ -7,17 +7,17 @@ import { buildCommandCenterRun, buildRunId, type SourceGap } from "../runs"
 import type { SourceEvidenceRef } from "../substrate"
 import type { RecruitingOpsModuleDefinition, RecruitingOpsModuleResult } from "./types"
 import { finalizeModuleResult } from "./types"
-export type RahulBoraGateStatus = "dormant" | "resume_requested" | "ready_for_review"
+export type RaneBorgGateStatus = "dormant" | "resume_requested" | "ready_for_review"
 
-export interface LegacyRahulBoraEvidenceRow {
+export interface LegacyRaneBorgEvidenceRow {
   gate_id: string
-  status?: RahulBoraGateStatus
+  status?: RaneBorgGateStatus
   last_run_date?: string
 }
 
-export interface RahulBoraResumeGateRow {
+export interface RaneBorgResumeGateRow {
   gate_id: string
-  status: RahulBoraGateStatus
+  status: RaneBorgGateStatus
   last_run_date: string
   template_preserved: boolean
   resume_requested: boolean
@@ -25,42 +25,42 @@ export interface RahulBoraResumeGateRow {
   next_gate: string
 }
 
-export interface RunRahulBoraDailyReportModuleInput {
+export interface RunRaneBorgDailyReportModuleInput {
   rootDir: string
   startedAt: string
   generatedAt: string
   lastRunDate?: string
   templatePreserved: boolean
   resumeRequested: boolean
-  legacyRows?: readonly LegacyRahulBoraEvidenceRow[]
+  legacyRows?: readonly LegacyRaneBorgEvidenceRow[]
 }
 
-export const rahulBoraDailyReportModuleDefinition = {
-  moduleId: "t10-rahul-bora-daily-report",
+export const raneBorgDailyReportModuleDefinition = {
+  moduleId: "t10-rane-borg-daily-report",
   workflowId: "T10",
   capabilityId: "automation_custody",
-  title: "T10 Rahul Bora Daily Report",
+  title: "T10 Rane Borg Daily Report",
   sourceIds: ["looker_sql_runner", "google_sheets", "google_apps_script"],
   queryIds: ["Q15"],
-  legacyArtifactIds: ["legacy_q15_rahul_bora_daily_report"],
-  outputContractIds: ["rahul_bora_sheet"],
+  legacyArtifactIds: ["legacy_q15_rane_borg_daily_report"],
+  outputContractIds: ["rane_borg_sheet"],
 } as const satisfies RecruitingOpsModuleDefinition
 
-const outputContract = concreteOutputContracts.find((contract) => contract.sourceContractId === "rahul_bora_sheet")!
-if (!outputContract) throw new Error("Missing Rahul Bora concrete output contract")
+const outputContract = concreteOutputContracts.find((contract) => contract.sourceContractId === "rane_borg_sheet")!
+if (!outputContract) throw new Error("Missing Rane Borg concrete output contract")
 
-const legacyArtifact = legacyArtifactRegistry.find((artifact) => artifact.id === "legacy_q15_rahul_bora_daily_report")!
-if (!legacyArtifact) throw new Error("Missing Rahul Bora legacy artifact")
+const legacyArtifact = legacyArtifactRegistry.find((artifact) => artifact.id === "legacy_q15_rane_borg_daily_report")!
+if (!legacyArtifact) throw new Error("Missing Rane Borg legacy artifact")
 
-export function deriveRahulBoraResumeGateRow(input: {
+export function deriveRaneBorgResumeGateRow(input: {
   lastRunDate?: string
   templatePreserved: boolean
   resumeRequested: boolean
-}): RahulBoraResumeGateRow {
+}): RaneBorgResumeGateRow {
   const lastRunDate = normalizeDate(input.lastRunDate)
   if (!input.resumeRequested) {
     return {
-      gate_id: "rahul_bora_resume_gate",
+      gate_id: "rane_borg_resume_gate",
       status: "dormant",
       last_run_date: lastRunDate,
       template_preserved: input.templatePreserved,
@@ -71,7 +71,7 @@ export function deriveRahulBoraResumeGateRow(input: {
   }
   if (!input.templatePreserved) {
     return {
-      gate_id: "rahul_bora_resume_gate",
+      gate_id: "rane_borg_resume_gate",
       status: "resume_requested",
       last_run_date: lastRunDate,
       template_preserved: false,
@@ -81,7 +81,7 @@ export function deriveRahulBoraResumeGateRow(input: {
     }
   }
   return {
-    gate_id: "rahul_bora_resume_gate",
+    gate_id: "rane_borg_resume_gate",
     status: "ready_for_review",
     last_run_date: lastRunDate,
     template_preserved: true,
@@ -91,26 +91,26 @@ export function deriveRahulBoraResumeGateRow(input: {
   }
 }
 
-export async function runRahulBoraDailyReportModule(
-  input: RunRahulBoraDailyReportModuleInput
-): Promise<RecruitingOpsModuleResult<RahulBoraResumeGateRow>> {
-  const runId = buildRunId(rahulBoraDailyReportModuleDefinition.workflowId, input.startedAt)
-  const normalizedRows = [deriveRahulBoraResumeGateRow(input)]
-  const sourceGaps = buildRahulBoraSourceGaps(normalizedRows[0])
-  const discrepancies = buildRahulBoraDiscrepancies(runId, normalizedRows, input.legacyRows ?? [], sourceGaps)
+export async function runRaneBorgDailyReportModule(
+  input: RunRaneBorgDailyReportModuleInput
+): Promise<RecruitingOpsModuleResult<RaneBorgResumeGateRow>> {
+  const runId = buildRunId(raneBorgDailyReportModuleDefinition.workflowId, input.startedAt)
+  const normalizedRows = [deriveRaneBorgResumeGateRow(input)]
+  const sourceGaps = buildRaneBorgSourceGaps(normalizedRows[0])
+  const discrepancies = buildRaneBorgDiscrepancies(runId, normalizedRows, input.legacyRows ?? [], sourceGaps)
   const sourceRefs: SourceEvidenceRef[] = [
     {
       id: legacyArtifact.id,
       sourceId: legacyArtifact.sourceId,
       adapter: "legacy_artifact",
-      label: "Q15 Rahul Bora dormant report evidence and template reference.",
+      label: "Q15 Rane Borg dormant report evidence and template reference.",
       artifactId: legacyArtifact.id,
       queryId: "Q15",
     },
   ]
   const publicSummary = {
-    workflowId: rahulBoraDailyReportModuleDefinition.workflowId,
-    moduleId: rahulBoraDailyReportModuleDefinition.moduleId,
+    workflowId: raneBorgDailyReportModuleDefinition.workflowId,
+    moduleId: raneBorgDailyReportModuleDefinition.moduleId,
     status: normalizedRows[0].status,
     resumeRequested: normalizedRows[0].resume_requested,
     sourceGapCount: sourceGaps.length,
@@ -119,7 +119,7 @@ export async function runRahulBoraDailyReportModule(
 
   const jsonArtifact = await writeJsonArtifact({
     rootDir: input.rootDir,
-    workflowId: rahulBoraDailyReportModuleDefinition.workflowId,
+    workflowId: raneBorgDailyReportModuleDefinition.workflowId,
     runId,
     schemaVersion: outputContract.schemaVersion,
     rows: normalizedRows,
@@ -129,7 +129,7 @@ export async function runRahulBoraDailyReportModule(
   })
   const csvArtifact = await writeCsvArtifact({
     rootDir: input.rootDir,
-    workflowId: rahulBoraDailyReportModuleDefinition.workflowId,
+    workflowId: raneBorgDailyReportModuleDefinition.workflowId,
     runId,
     schemaVersion: outputContract.schemaVersion,
     rows: normalizedRows,
@@ -138,9 +138,9 @@ export async function runRahulBoraDailyReportModule(
     columns: outputContract.columns.map((column) => ({ key: column.key, label: column.label })),
   })
   const run = buildCommandCenterRun({
-    workflowId: rahulBoraDailyReportModuleDefinition.workflowId,
-    capabilityId: rahulBoraDailyReportModuleDefinition.capabilityId,
-    moduleId: rahulBoraDailyReportModuleDefinition.moduleId,
+    workflowId: raneBorgDailyReportModuleDefinition.workflowId,
+    capabilityId: raneBorgDailyReportModuleDefinition.capabilityId,
+    moduleId: raneBorgDailyReportModuleDefinition.moduleId,
     mode: "fixture",
     status: sourceGaps.some((gap) => gap.blocksCutover) ? "blocked" : "succeeded",
     startedAt: input.startedAt,
@@ -155,7 +155,7 @@ export async function runRahulBoraDailyReportModule(
   })
 
   return finalizeModuleResult({
-    definition: rahulBoraDailyReportModuleDefinition,
+    definition: raneBorgDailyReportModuleDefinition,
     normalizedRows,
     artifacts: [jsonArtifact, csvArtifact],
     discrepancies,
@@ -164,7 +164,7 @@ export async function runRahulBoraDailyReportModule(
   })
 }
 
-function buildRahulBoraSourceGaps(row: RahulBoraResumeGateRow): SourceGap[] {
+function buildRaneBorgSourceGaps(row: RaneBorgResumeGateRow): SourceGap[] {
   if (row.status === "ready_for_review") return []
   return [
     {
@@ -178,16 +178,16 @@ function buildRahulBoraSourceGaps(row: RahulBoraResumeGateRow): SourceGap[] {
   ]
 }
 
-function buildRahulBoraDiscrepancies(
+function buildRaneBorgDiscrepancies(
   runId: string,
-  rows: readonly RahulBoraResumeGateRow[],
-  legacyRows: readonly LegacyRahulBoraEvidenceRow[],
+  rows: readonly RaneBorgResumeGateRow[],
+  legacyRows: readonly LegacyRaneBorgEvidenceRow[],
   sourceGaps: readonly SourceGap[]
 ): Discrepancy[] {
   const discrepancies = sourceGaps.map((gap) =>
     buildDiscrepancy({
       runId,
-      capabilityId: rahulBoraDailyReportModuleDefinition.capabilityId,
+      capabilityId: raneBorgDailyReportModuleDefinition.capabilityId,
       workflowId: "T10",
       class: "intentional_modernization",
       severity: "blocking",
@@ -209,7 +209,7 @@ function buildRahulBoraDiscrepancies(
       discrepancies.push(
         buildDiscrepancy({
           runId,
-          capabilityId: rahulBoraDailyReportModuleDefinition.capabilityId,
+          capabilityId: raneBorgDailyReportModuleDefinition.capabilityId,
           workflowId: "T10",
           class: "intentional_modernization",
           severity: "info",
@@ -227,7 +227,7 @@ function buildRahulBoraDiscrepancies(
       discrepancies.push(
         buildDiscrepancy({
           runId,
-          capabilityId: rahulBoraDailyReportModuleDefinition.capabilityId,
+          capabilityId: raneBorgDailyReportModuleDefinition.capabilityId,
           workflowId: "T10",
           class: "stale_mapping",
           severity: "warning",

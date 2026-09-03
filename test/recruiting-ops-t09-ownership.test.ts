@@ -25,16 +25,16 @@ function tempRoot(): string {
 }
 
 const ownershipFacts: GreenhouseOwnershipFact[] = [
-  // "Leah Thornton" is in the recruiter→team fixture config, so pod resolves to Team Leah.
+  // "Lena Trask" is in the recruiter→team fixture config, so pod resolves to Team Lena.
   {
     jobId: "job_1",
-    recruiterName: "Leah Thornton",
+    recruiterName: "Lena Trask",
     sourcerName: "Sourcer One",
     openingsCount: 2,
   },
   {
     jobId: "job_2",
-    recruiterName: "Leah Thornton",
+    recruiterName: "Lena Trask",
     sourcerName: "Sourcer Two",
     openingsCount: 1,
   },
@@ -59,25 +59,25 @@ describe("T09 ownership/workload module", () => {
       {
         view_type: "job",
         job_id: "job_1",
-        recruiter_name: "Leah Thornton",
+        recruiter_name: "Lena Trask",
         sourcer_name: "Sourcer One",
-        pod_name: "Team Leah",
+        pod_name: "Team Lena",
         openings_count: 2,
         workload_count: 2,
       },
       {
         view_type: "job",
         job_id: "job_2",
-        recruiter_name: "Leah Thornton",
+        recruiter_name: "Lena Trask",
         sourcer_name: "Sourcer Two",
-        pod_name: "Team Leah",
+        pod_name: "Team Lena",
         openings_count: 1,
         workload_count: 1,
       },
       {
         view_type: "recruiter",
         job_id: "all",
-        recruiter_name: "Leah Thornton",
+        recruiter_name: "Lena Trask",
         sourcer_name: null,
         pod_name: null,
         openings_count: 3,
@@ -96,7 +96,7 @@ describe("T09 ownership/workload module", () => {
         {
           view_type: "job",
           job_id: "job_1",
-          recruiter_name: "Leah Thornton",
+          recruiter_name: "Lena Trask",
           openings_count: 2,
         },
       ],
@@ -159,7 +159,7 @@ describe("T09 ownership/workload module", () => {
       greenhouseFacts: [
         {
           jobId: "unknown",
-          recruiterName: "Leah Thornton",
+          recruiterName: "Lena Trask",
           openingsCount: 1,
         },
       ],

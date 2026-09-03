@@ -17,7 +17,7 @@ export interface TeamResolutionEvidence {
 }
 
 /**
- * Team display labels here are person-derived ("Team Leah"), so public surfaces must
+ * Team display labels here are person-derived ("Team Lena"), so public surfaces must
  * carry the teamId slug instead. NULL for an unknown label — never a sentinel.
  */
 export function teamIdForTeamName(

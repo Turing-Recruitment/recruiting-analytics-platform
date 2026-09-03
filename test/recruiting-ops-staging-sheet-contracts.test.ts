@@ -97,7 +97,7 @@ describe("staging sheet range contracts", () => {
       headers: ["Team", "Total RPS", "Match", "Mismatch", "Strong Yes", "Yes", "No", "Other"],
       staticLayout: {
         titleCell: "A1",
-        titleTemplate: "Rahul Bora's Role Report - {DD MMM YYYY}",
+        titleTemplate: "Rane Borg's Role Report - {DD MMM YYYY}",
         mergeRanges: ["A1:N1"],
         labels: { A3: "Summary by Team" },
       },

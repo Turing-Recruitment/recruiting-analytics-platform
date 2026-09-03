@@ -4,10 +4,10 @@ import { join } from "node:path"
 import { afterEach, describe, expect, test } from "vitest"
 
 import {
-  deriveRahulBoraResumeGateRow,
-  rahulBoraDailyReportModuleDefinition,
-  runRahulBoraDailyReportModule,
-} from "../lib/recruiting-ops/modules/t10-rahul-bora-daily-report"
+  deriveRaneBorgResumeGateRow,
+  raneBorgDailyReportModuleDefinition,
+  runRaneBorgDailyReportModule,
+} from "../lib/recruiting-ops/modules/t10-rane-borg-daily-report"
 
 const roots: string[] = []
 
@@ -23,29 +23,29 @@ function tempRoot(): string {
   return root
 }
 
-describe("T10 Rahul Bora dormant report module", () => {
+describe("T10 Rane Borg dormant report module", () => {
   test("declares the expected workflow, query, artifact, and output contracts", () => {
-    expect(rahulBoraDailyReportModuleDefinition).toEqual({
-      moduleId: "t10-rahul-bora-daily-report",
+    expect(raneBorgDailyReportModuleDefinition).toEqual({
+      moduleId: "t10-rane-borg-daily-report",
       workflowId: "T10",
       capabilityId: "automation_custody",
-      title: "T10 Rahul Bora Daily Report",
+      title: "T10 Rane Borg Daily Report",
       sourceIds: ["looker_sql_runner", "google_sheets", "google_apps_script"],
       queryIds: ["Q15"],
-      legacyArtifactIds: ["legacy_q15_rahul_bora_daily_report"],
-      outputContractIds: ["rahul_bora_sheet"],
+      legacyArtifactIds: ["legacy_q15_rane_borg_daily_report"],
+      outputContractIds: ["rane_borg_sheet"],
     })
   })
 
   test("keeps the dormant report blocked by default while preserving the template state", () => {
     expect(
-      deriveRahulBoraResumeGateRow({
+      deriveRaneBorgResumeGateRow({
         lastRunDate: "2026-05-01T12:00:00.000Z",
         templatePreserved: true,
         resumeRequested: false,
       })
     ).toEqual({
-      gate_id: "rahul_bora_resume_gate",
+      gate_id: "rane_borg_resume_gate",
       status: "dormant",
       last_run_date: "2026-05-01",
       template_preserved: true,
@@ -56,7 +56,7 @@ describe("T10 Rahul Bora dormant report module", () => {
   })
 
   test("runs locally and writes a resume-gate artifact", async () => {
-    const result = await runRahulBoraDailyReportModule({
+    const result = await runRaneBorgDailyReportModule({
       rootDir: tempRoot(),
       startedAt: "2026-06-25T00:04:00.000Z",
       generatedAt: "2026-06-25T00:05:00.000Z",
@@ -75,7 +75,7 @@ describe("T10 Rahul Bora dormant report module", () => {
   })
 
   test("allows ready-for-review only after explicit resume and template preservation", async () => {
-    const result = await runRahulBoraDailyReportModule({
+    const result = await runRaneBorgDailyReportModule({
       rootDir: tempRoot(),
       startedAt: "2026-06-25T00:06:00.000Z",
       generatedAt: "2026-06-25T00:07:00.000Z",
@@ -94,7 +94,7 @@ describe("T10 Rahul Bora dormant report module", () => {
   })
 
   test("classifies legacy gate differences without reviving the report", async () => {
-    const result = await runRahulBoraDailyReportModule({
+    const result = await runRaneBorgDailyReportModule({
       rootDir: tempRoot(),
       startedAt: "2026-06-25T00:08:00.000Z",
       generatedAt: "2026-06-25T00:09:00.000Z",
@@ -103,7 +103,7 @@ describe("T10 Rahul Bora dormant report module", () => {
       resumeRequested: true,
       legacyRows: [
         {
-          gate_id: "rahul_bora_resume_gate",
+          gate_id: "rane_borg_resume_gate",
           status: "dormant",
           last_run_date: "2026-04-01",
         },
@@ -118,7 +118,7 @@ describe("T10 Rahul Bora dormant report module", () => {
   })
 
   test("blocks resume when the template has not been preserved", async () => {
-    const result = await runRahulBoraDailyReportModule({
+    const result = await runRaneBorgDailyReportModule({
       rootDir: tempRoot(),
       startedAt: "2026-06-25T00:10:00.000Z",
       generatedAt: "2026-06-25T00:11:00.000Z",

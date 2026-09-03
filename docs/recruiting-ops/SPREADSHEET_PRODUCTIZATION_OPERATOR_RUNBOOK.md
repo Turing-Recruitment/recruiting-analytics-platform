@@ -154,7 +154,7 @@ them paused.
 
 The manual canonical writers
 `weekly_recruitment_apps_script`, `role_pipeline_apps_script`,
-`all_hires_apps_script`, and `rahul_bora_apps_script` are not retired by this
+`all_hires_apps_script`, and `rane_borg_apps_script` are not retired by this
 rollout because canonical cutover was explicitly skipped. Public Schedulers are
 not Google-file writers and remain untouched.
 

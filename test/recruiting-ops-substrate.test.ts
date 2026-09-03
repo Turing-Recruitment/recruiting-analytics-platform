@@ -51,7 +51,7 @@ describe("recruiting ops P1 substrate contracts", () => {
       "legacy_q11_rps_tracking",
       "legacy_q12_final_offer",
       "legacy_q13_q14_role_assignment",
-      "legacy_q15_rahul_bora_daily_report",
+      "legacy_q15_rane_borg_daily_report",
       "legacy_rc_tracker_sheet",
       "legacy_recruiter_lead_slack_update_pattern",
       "legacy_s01_requisition_action_runbook",
@@ -104,11 +104,11 @@ describe("recruiting ops P1 substrate contracts", () => {
 
   test("separates raw SHA checksums from keyed local PII pseudonymous fingerprints", () => {
     expect(createPayloadFingerprint({ template: "weekly" })).toMatch(/^sha256:/)
-    const first = createPseudonymousFingerprint("Leah Thornton", {
+    const first = createPseudonymousFingerprint("Lena Trask", {
       key: "local-test-key",
       context: "owner",
     })
-    const second = createPseudonymousFingerprint("Leah Thornton", {
+    const second = createPseudonymousFingerprint("Lena Trask", {
       key: "local-test-key",
       context: "recipient",
     })
@@ -118,7 +118,7 @@ describe("recruiting ops P1 substrate contracts", () => {
     expect(isSupportedFingerprint(first)).toBe(true)
     expect(isSupportedFingerprint(createPayloadFingerprint({ template: "weekly" }))).toBe(true)
     expect(() =>
-      createPseudonymousFingerprint("Leah Thornton", {
+      createPseudonymousFingerprint("Lena Trask", {
         key: "",
         context: "owner",
       })

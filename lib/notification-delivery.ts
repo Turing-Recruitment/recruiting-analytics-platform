@@ -710,8 +710,8 @@ export function resolveRecipient(ctx?: RecipientCtx): RecipientResolution {
   // owner back to the head-of-TA, on the reasoning that we must not DM an arbitrary owner. Fan-out
   // dissolves that problem rather than working around it: recruiter mode emits one row PER owner,
   // each carrying its own recruiter_id, so there is never an arbitrary choice left to make. Live
-  // check on req 1206 (AI Engineering Lead, NY): Greenhouse's hiring team lists Rahul Panwar,
-  // Victor Carmona and Maggie Johnson all as Recruiters — the "(Recruiting tasks)" marker on one
+  // check on req 1206 (AI Engineering Lead, NY): Greenhouse's hiring team lists Remy Park,
+  // Vic Cole and Marge Jensen all as Recruiters — the "(Recruiting tasks)" marker on one
   // of them is a default task-assignment flag, NOT a statement that the other two are uninvolved.
   // A referral arriving on that req is news for all three.
   if (ctx.recruiterSlackId) {

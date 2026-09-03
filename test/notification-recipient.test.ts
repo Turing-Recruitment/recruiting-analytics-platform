@@ -3,7 +3,7 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest"
 import { resolveRecipient } from "../lib/notification-delivery"
 
-const HEAD = "U07RJJ6RLN6" // SWEEP_CONFIG.slack.headOfTaUserId
+const HEAD = "U07SYNTH0TA" // SWEEP_CONFIG.slack.headOfTaUserId
 
 describe("resolveRecipient (P4)", () => {
   afterEach(() => vi.unstubAllEnvs())

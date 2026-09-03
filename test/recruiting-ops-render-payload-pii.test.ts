@@ -10,7 +10,7 @@ import { renderJsonArtifact } from "../lib/recruiting-ops/renderers/json"
 // redacted projection and then certified STRICT, so the certified object IS the
 // delivered object. Person names must never appear in delivered bytes.
 
-const NAME = "Leah Thornton"
+const NAME = "Lena Trask"
 
 const rows: ReadonlyArray<Record<string, unknown>> = [
   { job_id: "job_1", owner: NAME, scorecard_status: "missing" },

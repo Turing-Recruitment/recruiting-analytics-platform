@@ -45,7 +45,7 @@ Other per-deliverable fields are not represented as columns in this table and ar
 | `rc_tracker_sheet` | `external_artifact_monitoring` | `auto_delivery` | `shadow` | `candidate` | 4 | N/A | N/A |
 | `power_bi_dashboard_alerts` | `external_artifact_monitoring` | `auto_delivery` | `shadow` | `candidate` | 4 | N/A | N/A |
 | `power_bi_rls_matrix` | `external_artifact_monitoring` | `action_proposal` | `review_required` | `never_auto` | 0 | N/A | RLS/access/vendor coordination affects permissions and payment-adjacent work; human execution required. |
-| `rahul_bora_sheet` | `automation_custody` | `review_assisted` | `review_required` | `blocked` | 4 | Transitional automation custody output; replacement/retirement decisions need review. | N/A |
+| `rane_borg_sheet` | `automation_custody` | `review_assisted` | `review_required` | `blocked` | 4 | Transitional automation custody output; replacement/retirement decisions need review. | N/A |
 | `n8n_custody_packet` | `automation_custody` | `review_assisted` | `review_required` | `blocked` | 4 | Credential/export custody and rotation risks require human review. | N/A |
 | `apps_script_asset_registry` | `automation_custody` | `review_assisted` | `review_required` | `blocked` | 4 | Script ownership/export/trigger custody requires human review and may expose credential rotation needs. | N/A |
 | `validation_signoff_log` | `transition_readiness_control` | `review_assisted` | `review_required` | `blocked` | 4 | Signoff is human-owned; automation can collect evidence only. | N/A |

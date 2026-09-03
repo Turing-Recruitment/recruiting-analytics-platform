@@ -51,19 +51,19 @@ describe("recruiting ops public output safety", () => {
     expect(result.ok).toBe(false)
     expect(result.violations.map((violation) => violation.reason)).toContain("direct contact field")
     expect(() => assertPublicSafe({ owner: "person@example.com" })).toThrow("not public-safe")
-    expect(inspectPublicValue({ ownerLabel: "Leah Thornton" }).violations.map((violation) => violation.reason)).toContain(
+    expect(inspectPublicValue({ ownerLabel: "Lena Trask" }).violations.map((violation) => violation.reason)).toContain(
       "person-identifying field"
     )
-    expect(inspectPublicValue({ recruiter_name: "Leah Thornton" }).violations.map((violation) => violation.reason)).toContain(
+    expect(inspectPublicValue({ recruiter_name: "Lena Trask" }).violations.map((violation) => violation.reason)).toContain(
       "person-identifying field"
     )
-    expect(inspectPublicValue({ displayName: "Leah Thornton" }).violations.map((violation) => violation.reason)).toContain(
+    expect(inspectPublicValue({ displayName: "Lena Trask" }).violations.map((violation) => violation.reason)).toContain(
       "person-identifying field"
     )
-    expect(inspectPublicValue({ owner: "Leah Thornton" }).violations.map((violation) => violation.reason)).toContain(
+    expect(inspectPublicValue({ owner: "Lena Trask" }).violations.map((violation) => violation.reason)).toContain(
       "person-identifying field"
     )
-    expect(inspectPublicValue({ summary: "Fixture owner Leah Thornton" }).violations.map((violation) => violation.reason)).toContain(
+    expect(inspectPublicValue({ summary: "Fixture owner Lena Trask" }).violations.map((violation) => violation.reason)).toContain(
       "person-identifying value"
     )
   })
@@ -72,7 +72,7 @@ describe("recruiting ops public output safety", () => {
     expect(
       redactForPublicValue({
         token: "abc",
-        ownerLabel: "Leah Thornton",
+        ownerLabel: "Lena Trask",
         nested: {
           owner: "person@example.com",
         },
@@ -84,7 +84,7 @@ describe("recruiting ops public output safety", () => {
         redacted_field_1: "[REDACTED]",
       },
     })
-    expect(redactForPublicValue({ summary: "Fixture owner Leah Thornton" })).toEqual({
+    expect(redactForPublicValue({ summary: "Fixture owner Lena Trask" })).toEqual({
       summary: "Fixture owner [REDACTED]",
     })
   })
@@ -108,8 +108,8 @@ describe("recruiting ops public output safety", () => {
     // token of every canonical string must be an operational word — or be declared here
     // as a known person-name word that only exact canonical phrases may carry.
     const canonicalPersonWords = new Set([
-      // T10/Q15 "Rahul Bora" reports, taxonomy interviewer rounds, tracker/handoff owners.
-      "rahul", "bora", "pronojit", "marawan", "daniel", "amar", "shantanu", "sam",
+      // T10/Q15 "Rane Borg" reports, taxonomy interviewer rounds, tracker/handoff owners.
+      "rane", "borg", "piers", "mara", "dane", "ames", "sam",
     ])
 
     const uncovered = new Set<string>()
@@ -131,8 +131,8 @@ describe("recruiting ops public output safety", () => {
   test("person-name shapes still flag when embedded near canonical vocabulary", () => {
     // Negative controls for the vocabulary: canonical phrases are allowed as exact
     // labels, but bare person names near vocabulary words must keep flagging.
-    expect(inspectPublicValue({ note: "Rahul Bora" }).ok).toBe(false)
-    expect(inspectPublicValue({ note: "Escalated to Leah Thornton for review" }).ok).toBe(false)
+    expect(inspectPublicValue({ note: "Rane Borg" }).ok).toBe(false)
+    expect(inspectPublicValue({ note: "Escalated to Lena Trask for review" }).ok).toBe(false)
     expect(inspectPublicValue({ note: "Weekly Progress Sheet for Frontier Data Lead" }).ok).toBe(true)
     expect(inspectPublicValue({ note: "Application Review" }).ok).toBe(true)
   })

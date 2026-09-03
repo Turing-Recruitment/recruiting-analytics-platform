@@ -18,7 +18,7 @@ const BUNDLE: ExecStateBundle = {
       department: "Engineering",
       confidential: false,
       req_class: "role",
-      owner: "Kanika Pandey",
+      owner: "Kendra Pace",
       owner_kind: "recruiter",
       owner_on_roster: true,
       seats: 2,

@@ -67,7 +67,7 @@ async function buildFixtureCatalog() {
     greenhouseFacts: ownershipFacts(),
     ownershipScope: {
       recipientFingerprint: ownershipRecipientFingerprint,
-      teamName: "Team Leah",
+      teamName: "Team Lena",
     },
   })
   const blockedScorecard = await runScorecardAccountabilityShadow({
@@ -108,8 +108,8 @@ async function buildFixtureCatalog() {
     createdAt: "2026-06-24T17:02:00.000Z",
     proposedPayload: {
       field: "recruiter",
-      ownerEmail: "leah@example.com",
-      ownerLabel: "Leah Thornton",
+      ownerEmail: "lena@example.com",
+      ownerLabel: "Lena Trask",
     },
   })
   const catalog = buildLocalRunCatalog({
@@ -148,7 +148,7 @@ describe("local run catalog", () => {
     })
     expect(catalog.discrepancies[0].ownerFingerprint).toMatch(/^hmac-sha256:/)
     expect(JSON.stringify(catalog.discrepancies)).not.toContain("\"owner\":\"Sam\"")
-    expect(JSON.stringify(catalog.discrepancies)).not.toMatch(/Leah Thornton/i)
+    expect(JSON.stringify(catalog.discrepancies)).not.toMatch(/Lena Trask/i)
   })
 
   test("filters catalog evidence by capability, deliverable, gate status, and action proposal state", async () => {
@@ -182,9 +182,9 @@ describe("local run catalog", () => {
     expect(lineage.actionProposals.map((proposal) => proposal.proposalId)).toEqual([actionProposal.proposalId])
     expect(() => assertPublicSafe(catalog.publicSummary)).not.toThrow()
     expect(() => assertPublicSafe(lineage.actionProposals[0].redactedPayloadSummary)).not.toThrow()
-    expect(JSON.stringify(lineage.actionProposals[0])).not.toMatch(/leah@example\.com|Leah Thornton|candidate_email|phone/i)
+    expect(JSON.stringify(lineage.actionProposals[0])).not.toMatch(/lena@example\.com|Lena Trask|candidate_email|phone/i)
     expect(JSON.stringify(lineage.discrepancies)).not.toContain("\"owner\":\"Sam\"")
-    expect(JSON.stringify(lineage.discrepancies)).not.toMatch(/Leah Thornton/i)
+    expect(JSON.stringify(lineage.discrepancies)).not.toMatch(/Lena Trask/i)
   })
 
   test("writes and reads the catalog only through local filesystem paths", async () => {

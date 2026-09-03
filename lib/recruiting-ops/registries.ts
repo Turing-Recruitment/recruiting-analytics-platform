@@ -128,7 +128,7 @@ export const workflowRegistry = [
   workflow("T07", "Final Offer Report", "reporting", "weekly", "P0", "manual", "Offer lifecycle module with monthly renderer, mapping registry, and discrepancy checks.", ["greenhouse", "looker_sql_runner", "google_sheets"], ["Q12"], ["final_offer_sheet"]),
   workflow("T08", "All Hires Tracker", "external_monitor", "daily", "P1", "automated_external", "Managed external Apps Script automation monitor and replacement candidate after two clean cycles.", ["greenhouse", "google_sheets", "google_apps_script"], [], ["all_hires_sheet"]),
   workflow("T09", "Role Assignment By Pod", "reporting", "weekly", "P1", "manual", "Role ownership and recruiter workload snapshot.", ["greenhouse", "looker_sql_runner", "google_sheets"], ["Q13", "Q14"], ["role_assignment_sheet"]),
-  workflow("T10", "Rahul Bora Daily Report", "reporting", "dormant", "Stop", "dormant", "Dormant template and resume gate.", ["looker_sql_runner", "google_sheets", "google_apps_script"], ["Q15"], ["rahul_bora_sheet"]),
+  workflow("T10", "Rane Borg Daily Report", "reporting", "dormant", "Stop", "dormant", "Dormant template and resume gate.", ["looker_sql_runner", "google_sheets", "google_apps_script"], ["Q15"], ["rane_borg_sheet"]),
   workflow("T12", "RC Tracker Monitoring", "external_monitor", "daily", "P1", "manual", "External sheet monitor with exception flags and owner follow-up queue.", ["google_sheets"], [], ["rc_tracker_sheet"]),
   workflow("T13", "Power BI Dashboard Monitoring", "external_monitor", "weekly", "P1", "manual", "BI dashboard registry, refresh-alert ingestion, and triage queue.", ["power_bi"], [], ["power_bi_dashboard_alerts"]),
   workflow("T14", "Power BI RLS / iFour Coordination", "admin", "ad_hoc", "P2", "manual", "RLS/access matrix registry plus vendor coordination evidence.", ["power_bi", "google_sheets", "ifour"], [], ["power_bi_rls_matrix"]),
@@ -163,14 +163,14 @@ export const queryRegistry = [
   query("Q12", "Final offer lifecycle query", ["T07"], "offer/application/candidate/job lifecycle", "quarter/month range", ["quarter", "month"], ["final_offer_sheet"]),
   query("Q13", "Role assignment by job query", ["T09"], "single row per job", "current open role snapshot", ["as_of"], ["role_assignment_sheet"]),
   query("Q14", "Role assignment by recruiter query", ["T09"], "single row per recruiter", "current recruiter workload snapshot", ["as_of"], ["role_assignment_sheet"]),
-  query("Q15", "Rahul Bora daily report query", ["T10"], "dormant daily report template", "legacy LAST_RUN_DATE control", ["last_run_date"], ["rahul_bora_sheet"]),
+  query("Q15", "Rane Borg daily report query", ["T10"], "dormant daily report template", "legacy LAST_RUN_DATE control", ["last_run_date"], ["rane_borg_sheet"]),
 ] as const satisfies readonly QueryRegistryRow[]
 
 export const scriptAssetRegistry = [
   scriptAsset("weekly_recruitment_apps_script", "Weekly Recruitment Report Apps Script", "apps_script", ["T01"], ["google_apps_script", "google_sheets"], "export_required", "personal_or_departing_risk"),
   scriptAsset("role_pipeline_apps_script", "Role-Specific Pipeline Apps Script", "apps_script", ["T02"], ["google_apps_script", "google_sheets"], "export_required", "personal_or_departing_risk"),
   scriptAsset("all_hires_apps_script", "All Hires Tracker Apps Script", "apps_script", ["T08"], ["google_apps_script", "google_sheets", "greenhouse"], "export_required", "personal_or_departing_risk"),
-  scriptAsset("rahul_bora_apps_script", "Rahul Bora Control Apps Script", "apps_script", ["T10"], ["google_apps_script", "google_sheets"], "reference_only", "not_secret_bearing"),
+  scriptAsset("rane_borg_apps_script", "Rane Borg Control Apps Script", "apps_script", ["T10"], ["google_apps_script", "google_sheets"], "reference_only", "not_secret_bearing"),
   scriptAsset("duplicate_candidate_n8n", "Duplicate Candidate n8n Workflow", "n8n", ["T15", "T16"], ["n8n", "greenhouse", "mailgun"], "custody_required", "external_workflow_risk"),
 ] as const satisfies readonly ScriptAssetRegistryRow[]
 
@@ -184,7 +184,7 @@ export const outputContractRegistry = [
   output("final_offer_sheet", "Final Offer Report Sheet", ["T07"], "google_sheet", ["google_sheets"], ["mapping review"], ["offer status class", "month bucket"]),
   output("all_hires_sheet", "All Hires Tracker Sheet", ["T08"], "google_sheet", ["google_sheets"], ["run health review"], ["daily trigger evidence"]),
   output("role_assignment_sheet", "Role Assignment By Pod Sheet", ["T09"], "google_sheet", ["google_sheets"], ["pivot adjustment"], ["single-row-per-job", "single-row-per-recruiter"]),
-  output("rahul_bora_sheet", "Rahul Bora Dormant Report", ["T10"], "google_sheet", ["google_sheets"], ["resume approval"], ["LAST_RUN_DATE preserved"]),
+  output("rane_borg_sheet", "Rane Borg Dormant Report", ["T10"], "google_sheet", ["google_sheets"], ["resume approval"], ["LAST_RUN_DATE preserved"]),
   output("rc_tracker_sheet", "RC Tracker Sheet", ["T12"], "google_sheet", ["google_sheets"], ["owner follow-up"], ["exception flags"]),
   output("power_bi_dashboard_alerts", "Power BI Dashboard Alert Queue", ["T13"], "power_bi", ["power_bi"], ["refresh triage"], ["dashboard registry"]),
   output("power_bi_rls_matrix", "Power BI RLS / iFour Access Matrix", ["T14"], "google_sheet", ["power_bi", "google_sheets", "ifour"], ["vendor coordination"], ["access matrix coverage"]),

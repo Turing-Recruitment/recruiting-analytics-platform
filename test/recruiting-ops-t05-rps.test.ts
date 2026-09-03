@@ -34,9 +34,9 @@ const completeFacts: GreenhouseRpsFact[] = [
     stageName: "Recruiter Phone Screen",
     scheduledAt: "2026-06-17T17:00:00.000Z",
     scorecardStatus: "submitted",
-    // "Leah Thornton" is in the recruiter→team fixture config; submitter == interviewer => match.
-    interviewerName: "Leah Thornton",
-    submitterName: "Leah Thornton",
+    // "Lena Trask" is in the recruiter→team fixture config; submitter == interviewer => match.
+    interviewerName: "Lena Trask",
+    submitterName: "Lena Trask",
     overallRecommendation: "strong_yes",
   },
 ]
@@ -72,9 +72,9 @@ describe("T05 RPS module", () => {
         interview_stage: "rps",
         scorecard_status: "submitted",
         week_bucket: "2026-06-15",
-        interviewer_name: "Leah Thornton",
-        submitter_name: "Leah Thornton",
-        team_name: "Team Leah",
+        interviewer_name: "Lena Trask",
+        submitter_name: "Lena Trask",
+        team_name: "Team Lena",
         match_mismatch: "match",
         overall_recommendation: "strong_yes",
       },

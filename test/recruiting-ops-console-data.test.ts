@@ -65,8 +65,8 @@ describe("recruiting ops console data", () => {
       actionProposalCount: 1,
     })
     expect(data.automation.gateFailures.map((gate) => gate.deliverableId)).toContain("rps_tracking_sheet")
-    expect(JSON.stringify(data.automation.actionProposals)).not.toMatch(/@|candidate_email|phone|Leah Thornton/i)
-    expect(JSON.stringify(data)).not.toMatch(/leah@example\.com/i)
+    expect(JSON.stringify(data.automation.actionProposals)).not.toMatch(/@|candidate_email|phone|Lena Trask/i)
+    expect(JSON.stringify(data)).not.toMatch(/lena@example\.com/i)
   })
 
   test("filters lane detail data without crossing delivery authorization boundaries", () => {

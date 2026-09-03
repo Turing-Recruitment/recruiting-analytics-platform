@@ -78,7 +78,7 @@ describe("recruiting ops local workflow runner", () => {
         offer_count: 1,
         rps_missing_count: 1,
         openings_count: 2,
-        recruiter_name: "Leah Thornton",
+        recruiter_name: "Lena Trask",
         week_bucket: "2026-06-15",
         billable: null,
         priority: null,

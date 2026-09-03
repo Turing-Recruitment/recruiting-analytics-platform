@@ -166,7 +166,7 @@ describe("Final Offer staging renderer", () => {
       quarter: q3,
       rows: [
         offer({ offer_id: "1" }),
-        offer({ offer_id: "2", application_recruiter_name: "Vinal Mishra" }),
+        offer({ offer_id: "2", application_recruiter_name: "Val Moss" }),
         offer({ offer_id: "3", job_name: "Campus 2025 Hires" }),
         offer({ offer_id: "4", offer_status: "deprecated" }),
         offer({ offer_id: "5", rejection_reason_name: "Duplicate" }),

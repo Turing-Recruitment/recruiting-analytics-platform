@@ -10,7 +10,7 @@ import { inspectPublicValue, redactForPublicValue } from "../lib/recruiting-ops/
 // inspectPublicValue and redactForPublicValue. Each shape below previously evaded the
 // key-pattern/labeled-name grammar and was certified public-safe while leaking a name.
 
-const NAME = "Leah Thornton"
+const NAME = "Lena Trask"
 
 const evadingShapes: Array<{ label: string; value: Record<string, unknown>; leaks: string }> = [
   { label: "snake_case full_name key (not in the camelCase allow-list)", value: { full_name: NAME }, leaks: NAME },

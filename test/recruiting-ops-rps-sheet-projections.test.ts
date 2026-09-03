@@ -437,7 +437,7 @@ describe("RPS staging sheet projections", () => {
     expect(projection.dated).toMatchObject({
       sheetTitle: "09 Jul 2026",
       titleCell: "A1",
-      titleValue: "Rahul Bora's Role Report - 09 Jul 2026",
+      titleValue: "Rane Borg's Role Report - 09 Jul 2026",
       mergeRanges: ["A1:N1"],
       sectionLabelCell: "A3",
       sectionLabel: "Summary by Team",

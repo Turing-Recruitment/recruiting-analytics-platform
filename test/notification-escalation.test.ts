@@ -91,7 +91,7 @@ describe("buildEscalationEmail (pure)", () => {
       candidate_id: 9001,
       candidate_name: "Jane Candidate",
       job_title: "Staff Engineer",
-      recruiter_owner_name: "Leah Thornton",
+      recruiter_owner_name: "Lena Trask",
       referrer_name: "Pat Referrer",
       current_stage: "Application Review",
       escalation_age_hours: 60,
@@ -136,9 +136,9 @@ describe("buildEscalationEmail (pure)", () => {
 
   test("html is HTML-escaped + PII-scrubbed", () => {
     const { html } = buildEscalationEmail(
-      intent({ candidate_name: "A <script> & Co", recruiter_owner_name: "Leah Thornton" })
+      intent({ candidate_name: "A <script> & Co", recruiter_owner_name: "Lena Trask" })
     )
-    expect(html).toContain("Leah Thornton")
+    expect(html).toContain("Lena Trask")
     expect(html).toContain("&lt;script&gt;")
     expect(html).not.toContain("<script>")
   })

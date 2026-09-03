@@ -7,8 +7,8 @@
  * - `allowedPublicPhrases`: exact canonical strings assembled from the plane's
  *   own configs (registry titles, stage-taxonomy strings, legacy artifact
  *   titles, output-contract column labels). Required because some canonical
- *   phrases embed person names ("Rahul Bora Daily Report",
- *   "R2 - Pronojit/Marawan Interview"): the exact phrase stays usable as an
+ *   phrases embed person names ("Rane Borg Daily Report",
+ *   "R2 - Piers/Mara Interview"): the exact phrase stays usable as an
  *   operational label while the bare name remains redactable in free text.
  * - `operationalWords`: lower-cased single-word allowlist (versioned config at
  *   config/operational-vocabulary.v1.ts) for capitalized runs that are

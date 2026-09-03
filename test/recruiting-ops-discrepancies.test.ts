@@ -62,9 +62,9 @@ describe("recruiting ops discrepancy substrate", () => {
 
     const name = buildDiscrepancy({
       ...baseDiscrepancy,
-      legacyValueSummary: "assigned to Leah Thornton",
+      legacyValueSummary: "assigned to Lena Trask",
     })
-    expect(name.legacyValueSummary).not.toContain("Leah Thornton")
+    expect(name.legacyValueSummary).not.toContain("Lena Trask")
     expect(name.legacyValueSummary).toContain("[REDACTED]")
   })
 

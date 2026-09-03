@@ -1656,15 +1656,15 @@ Residual blockers:
 
 Next gate:
 
-- Implement T10 Rahul Bora Daily Report as a dormant-template/resume-gate module that preserves Q15 evidence and blocks execution until explicitly resumed.
+- Implement T10 Rane Borg Daily Report as a dormant-template/resume-gate module that preserves Q15 evidence and blocks execution until explicitly resumed.
 
-## 2026-06-24: T10 Rahul Bora Dormant Resume Gate
+## 2026-06-24: T10 Rane Borg Dormant Resume Gate
 
 Completed gate:
 
-- Implemented `t10-rahul-bora-daily-report` as a dormant-template/resume-gate module.
-- Added a concrete local output contract for `rahul_bora_sheet`.
-- Registered `legacy_q15_rahul_bora_daily_report` as Q15/template evidence with the dormant execution posture preserved.
+- Implemented `t10-rane-borg-daily-report` as a dormant-template/resume-gate module.
+- Added a concrete local output contract for `rane_borg_sheet`.
+- Registered `legacy_q15_rane_borg_daily_report` as Q15/template evidence with the dormant execution posture preserved.
 - Kept the default T10 state blocked/dormant unless resume is explicitly requested and the template is preserved.
 - Classified dormant blocking as intentional modernization and LAST_RUN_DATE mismatches as stale mapping.
 - Rendered local JSON and CSV artifacts only; no SQL execution or Sheet write path was added.
@@ -1672,15 +1672,15 @@ Completed gate:
 Files changed:
 
 - `lib/recruiting-ops/index.ts`
-- `lib/recruiting-ops/modules/t10-rahul-bora-daily-report.ts`
+- `lib/recruiting-ops/modules/t10-rane-borg-daily-report.ts`
 - `lib/recruiting-ops/output-contracts.ts`
 - `lib/recruiting-ops/legacy-artifact-registry.ts`
-- `test/recruiting-ops-t10-rahul-bora-daily-report.test.ts`
+- `test/recruiting-ops-t10-rane-borg-daily-report.test.ts`
 - `test/recruiting-ops-substrate.test.ts`
 
 Commands run:
 
-- `npm test -- test/recruiting-ops-t10-rahul-bora-daily-report.test.ts test/recruiting-ops-substrate.test.ts`
+- `npm test -- test/recruiting-ops-t10-rane-borg-daily-report.test.ts test/recruiting-ops-substrate.test.ts`
 - `npm run check:recruiting-ops`
 - `npm test`
 - `git diff --check`

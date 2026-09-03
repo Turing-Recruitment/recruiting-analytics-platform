@@ -24,8 +24,8 @@ import { computeMatchMismatch, normalizeRpsRows, type GreenhouseRpsFact } from "
 describe("T05: shared first name is NOT the same person — must be a mismatch", () => {
   const sharedFirstNamePairs: Array<{ submitter: string; interviewer: string }> = [
     { submitter: "Priya Sharma", interviewer: "Priya Venkatesan" },
-    { submitter: "Marcus Webb", interviewer: "Marcus Thornton" },
-    { submitter: "Leah Park", interviewer: "Leah Okafor" },
+    { submitter: "Marcus Webb", interviewer: "Marcus Trask" },
+    { submitter: "Lena Park", interviewer: "Lena Okafor" },
   ]
 
   for (const { submitter, interviewer } of sharedFirstNamePairs) {

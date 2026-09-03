@@ -94,7 +94,7 @@ describe("resolveOwnership — recruiter ownership ladder", () => {
   // R1 (the responsible_owner rung, grafted from C1): exactly one responsible:true
   // recruiter owner -> confirmed, with NO application recruiter and NO proxy call.
   // This is the live job 4962131004 shape (3 recruiter owners, one responsible:true
-  // =5103434004) and is the rung that replaces the wrong recruiters[0] pick
+  // =4200000003) and is the rung that replaces the wrong recruiters[0] pick
   // (ytd-normalize.ts:366, identity-resolver.ts:311-324).
   test("single responsible:true owner among many resolves confirmed (responsible_owner), no app recruiter", () => {
     const result = resolveOwnership(
@@ -102,12 +102,12 @@ describe("resolveOwnership — recruiter ownership ladder", () => {
         applicationRecruiterId: null,
         jobOwners: [
           owner({ user_id: 4381126004 }),
-          owner({ user_id: 5103434004, responsible: true }),
+          owner({ user_id: 4200000003, responsible: true }),
           owner({ user_id: 5200000004 }),
         ],
         usersById: users([
           [4381126004, "Avery First"],
-          [5103434004, "Riley Responsible"],
+          [4200000003, "Riley Responsible"],
           [5200000004, "Casey Third"],
         ]),
       })
@@ -115,9 +115,9 @@ describe("resolveOwnership — recruiter ownership ladder", () => {
 
     expect(result.status).toBe("resolved")
     expect(result.confidence).toBe("confirmed")
-    expect(result.primary_recruiter_id).toBe(5103434004)
+    expect(result.primary_recruiter_id).toBe(4200000003)
     expect(result.primary_recruiter_name).toBe("Riley Responsible")
-    expect(result.responsible_recruiter_id).toBe(5103434004)
+    expect(result.responsible_recruiter_id).toBe(4200000003)
     expect(result.evidence_types).toContain<OwnershipEvidenceType>(
       "responsible_owner"
     )
@@ -140,15 +140,15 @@ describe("resolveOwnership — recruiter ownership ladder", () => {
   test("application recruiter id that is a job owner resolves confirmed (owner_match)", () => {
     const result = resolveOwnership(
       evidence({
-        applicationRecruiterId: 5103434004,
+        applicationRecruiterId: 4200000003,
         jobOwners: [
           owner({ user_id: 4381126004 }),
-          owner({ user_id: 5103434004 }),
+          owner({ user_id: 4200000003 }),
           owner({ user_id: 5200000004 }),
         ],
         usersById: users([
           [4381126004, "Avery First"],
-          [5103434004, "Riley Owner"],
+          [4200000003, "Riley Owner"],
           [5200000004, "Casey Third"],
         ]),
       })
@@ -156,7 +156,7 @@ describe("resolveOwnership — recruiter ownership ladder", () => {
 
     expect(result.status).toBe("resolved")
     expect(result.confidence).toBe("confirmed")
-    expect(result.primary_recruiter_id).toBe(5103434004)
+    expect(result.primary_recruiter_id).toBe(4200000003)
     expect(result.primary_recruiter_name).toBe("Riley Owner")
     expect(result.evidence_types).toContain<OwnershipEvidenceType>("owner_match")
     expect(result.evidence_types).toContain<OwnershipEvidenceType>(
@@ -234,19 +234,19 @@ describe("resolveOwnership — recruiter ownership ladder", () => {
       evidence({
         jobOwners: [
           owner({ user_id: 4381126004, active: false }),
-          owner({ user_id: 5103434004, active: true }),
+          owner({ user_id: 4200000003, active: true }),
         ],
         usersById: users([
           [4381126004, "Inactive Recruiter"],
-          [5103434004, "Active Recruiter"],
+          [4200000003, "Active Recruiter"],
         ]),
       })
     )
 
     expect(result.status).toBe("resolved")
     expect(result.confidence).toBe("high")
-    expect(result.primary_recruiter_id).toBe(5103434004)
-    expect(result.recruiter_ids).toEqual([5103434004])
+    expect(result.primary_recruiter_id).toBe(4200000003)
+    expect(result.recruiter_ids).toEqual([4200000003])
     assertContractInvariants(result)
   })
 })
@@ -262,12 +262,12 @@ describe("resolveOwnership — ambiguity is recorded, never arbitrated", () => {
         applicationRecruiterId: null,
         jobOwners: [
           owner({ user_id: 4381126004 }),
-          owner({ user_id: 5103434004 }),
+          owner({ user_id: 4200000003 }),
           owner({ user_id: 5200000004 }),
         ],
         usersById: users([
           [4381126004, "Avery First"],
-          [5103434004, "Riley Second"],
+          [4200000003, "Riley Second"],
           [5200000004, "Casey Third"],
         ]),
       })
@@ -282,7 +282,7 @@ describe("resolveOwnership — ambiguity is recorded, never arbitrated", () => {
     // The contended owners are recorded so the defect surface can show them
     // (resolution-types.ts:149-151, identity-resolver.ts:436).
     expect(result.ambiguous_candidate_ids).toEqual(
-      expect.arrayContaining([4381126004, 5103434004, 5200000004])
+      expect.arrayContaining([4381126004, 4200000003, 5200000004])
     )
     expect(result.ambiguous_candidate_ids).toHaveLength(3)
     // ambiguous is a defect, not a confident resolution.
@@ -300,11 +300,11 @@ describe("resolveOwnership — ambiguity is recorded, never arbitrated", () => {
       applicationRecruiterId: null,
       jobOwners: [
         owner({ user_id: 4381126004 }),
-        owner({ user_id: 5103434004 }),
+        owner({ user_id: 4200000003 }),
       ],
       usersById: users([
         [4381126004, "Avery First"],
-        [5103434004, "Riley Scorer"],
+        [4200000003, "Riley Scorer"],
       ]),
     }
 
@@ -314,12 +314,12 @@ describe("resolveOwnership — ambiguity is recorded, never arbitrated", () => {
 
     // With a scorecard submitter that is one of the owners, that owner is picked.
     const resolved = resolveOwnership(
-      evidence({ ...base, scorecardSubmitterIds: [5103434004] })
+      evidence({ ...base, scorecardSubmitterIds: [4200000003] })
     )
 
     expect(resolved.status).toBe("resolved")
     expect(resolved.confidence).toBe("inferred")
-    expect(resolved.primary_recruiter_id).toBe(5103434004)
+    expect(resolved.primary_recruiter_id).toBe(4200000003)
     expect(resolved.primary_recruiter_name).toBe("Riley Scorer")
     expect(resolved.evidence_types).toContain<OwnershipEvidenceType>("scorecard")
     // It did NOT default to the first owner; proxy evidence chose the second.
@@ -337,20 +337,20 @@ describe("resolveOwnership — ambiguity is recorded, never arbitrated", () => {
         applicationRecruiterId: null,
         jobOwners: [
           owner({ user_id: 4381126004 }),
-          owner({ user_id: 5103434004 }),
+          owner({ user_id: 4200000003 }),
         ],
         usersById: users([
           [4381126004, "Avery First"],
-          [5103434004, "Riley Actor"],
+          [4200000003, "Riley Actor"],
         ]),
         // No scorecard evidence; the activity author is the only proxy signal.
-        activityActorIds: [5103434004],
+        activityActorIds: [4200000003],
       })
     )
 
     expect(resolved.status).toBe("resolved")
     expect(resolved.confidence).toBe("inferred")
-    expect(resolved.primary_recruiter_id).toBe(5103434004)
+    expect(resolved.primary_recruiter_id).toBe(4200000003)
     expect(resolved.evidence_types).toContain<OwnershipEvidenceType>(
       "note_activity"
     )
@@ -367,11 +367,11 @@ describe("resolveOwnership — ambiguity is recorded, never arbitrated", () => {
         applicationRecruiterId: null,
         jobOwners: [
           owner({ user_id: 4381126004 }),
-          owner({ user_id: 5103434004 }),
+          owner({ user_id: 4200000003 }),
         ],
         usersById: users([
           [4381126004, "Avery First"],
-          [5103434004, "Riley Second"],
+          [4200000003, "Riley Second"],
         ]),
         scorecardSubmitterIds: [888], // a submitter who is not a job owner
         activityActorIds: [888],
@@ -381,7 +381,7 @@ describe("resolveOwnership — ambiguity is recorded, never arbitrated", () => {
     expect(result.status).toBe("ambiguous")
     expect(result.primary_recruiter_id).toBeNull()
     expect(result.ambiguous_candidate_ids).toEqual(
-      expect.arrayContaining([4381126004, 5103434004])
+      expect.arrayContaining([4381126004, 4200000003])
     )
     assertContractInvariants(result)
   })
@@ -488,11 +488,11 @@ describe("resolveOwnership — unresolved defect contract", () => {
         applicationRecruiterId: null,
         jobOwners: [
           owner({ user_id: 4381126004 }),
-          owner({ user_id: 5103434004 }),
+          owner({ user_id: 4200000003 }),
         ],
         usersById: users([
           [4381126004, "Avery First"],
-          [5103434004, "Riley Second"],
+          [4200000003, "Riley Second"],
         ]),
       })
     )

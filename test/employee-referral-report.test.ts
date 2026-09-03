@@ -263,8 +263,8 @@ describe("employee referral eligibility first pass", () => {
     expect(
       evaluateEmployeeReferralEligibility({
         ...base,
-        referringEmployeeName: "Tristan Tager",
-        hiringManagerNames: ["Tristan Tager"],
+        referringEmployeeName: "Trent Tabor",
+        hiringManagerNames: ["Trent Tabor"],
         offerJobTitle: "Strategic Project Lead",
       })
     ).toMatchObject({
@@ -285,7 +285,7 @@ describe("employee referral eligibility first pass", () => {
     expect(
       evaluateEmployeeReferralEligibility({
         ...base,
-        referringEmployeeName: "Rahul Gupte",
+        referringEmployeeName: "Remo Gale",
         offerJobTitle: "Code OTS Delivery Intern - US",
       })
     ).toMatchObject({
@@ -354,7 +354,7 @@ describe("employee referral eligibility first pass", () => {
     expect(
       evaluateEmployeeReferralEligibility({
         ...base,
-        referringEmployeeName: "Dhanasree Molugu",
+        referringEmployeeName: "Dinah Marlow",
       })
     ).toEqual({
       status: "PENDING - 90 DAYS NOT COMPLETED",
@@ -364,7 +364,7 @@ describe("employee referral eligibility first pass", () => {
     expect(
       evaluateEmployeeReferralEligibility({
         ...base,
-        referringEmployeeName: "Dhanasree Molugu",
+        referringEmployeeName: "Dinah Marlow",
         hiringManagerNames: [],
       })
     ).toMatchObject({

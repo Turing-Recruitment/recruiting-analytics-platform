@@ -16,7 +16,7 @@ function reportRows(): SheetCellValue[][] {
   return [
     row(["Summary by Team"]),
     row(["Team", "Total RPS", "Match", "Mismatch", "Strong Yes", "Yes", "No", "Other"]),
-    row(["Team Vinisha", 2, 2, 0, 0, 1, 1, 0]),
+    row(["Team Vera", 2, 2, 0, 0, 1, 1, 0]),
     row([]), row([]),
     row(["Summary by Submitter"]),
     row(["Submitter", "Total RPS", "Match", "Mismatch", "Strong Yes", "Yes", "No", "Other"]),
@@ -36,7 +36,7 @@ function reportRows(): SheetCellValue[][] {
       "Interviewer", "Recommendation", "Match/Mismatch", "Recruiters", "Sourcers", "Week",
       "Key Takeaways",
     ]),
-    row(["Candidate", "Role", 907, "Active", "Recruiter", "Team Vinisha", "Screen"]),
+    row(["Candidate", "Role", 907, "Active", "Recruiter", "Team Vera", "Screen"]),
   ]
 }
 

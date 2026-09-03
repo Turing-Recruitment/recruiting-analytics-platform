@@ -32,7 +32,7 @@ Disposition values:
 | T07 | Final Offer Report | `offer_and_hire_lifecycle_intelligence` | `capability_refactor` | Reframe as offer lifecycle intelligence; Q12 remains evidence. |
 | T08 | All Hires Tracker | `offer_and_hire_lifecycle_intelligence` | `capability_refactor` | Track accepted-hire/start-readiness; Apps Script is custody/evidence, not product architecture. |
 | T09 | Role Assignment By Pod | `ownership_capacity_management` | `capability_refactor` | Reframe as ownership/capacity management and unmapped owner detection. |
-| T10 | Rahul Bora Daily Report | `automation_custody` | `exclude_or_dormant` | Preserve template and resume gate; do not build unless consumer is reconfirmed. |
+| T10 | Rane Borg Daily Report | `automation_custody` | `exclude_or_dormant` | Preserve template and resume gate; do not build unless consumer is reconfirmed. |
 | T12 | RC Tracker Monitoring | `external_artifact_monitoring` | `legacy_mapping` | Treat as external artifact monitor and exception source. |
 | T13 | Power BI Dashboard Monitoring | `external_artifact_monitoring` | `legacy_mapping` | Monitor dashboard inventory/alerts only; Power BI is not a product capability. |
 | T14 | Power BI RLS / iFour Coordination | `external_artifact_monitoring` | `human_only` | Keep access/vendor coordination human-owned with evidence. |

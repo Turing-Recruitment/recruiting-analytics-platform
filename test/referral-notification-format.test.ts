@@ -22,7 +22,7 @@ function referralIntent(
     candidate_name: "Harsh Dwivedi",
     job_title: "Technical Business Analyst",
     referrer_name: "Shreya Verma",
-    recruiter_owner_name: "Martin Franco",
+    recruiter_owner_name: "Marlon Frost",
     current_stage: "Application Review",
     hours_in_stage: 25,
     urgency_since: "1 day ago",
@@ -51,7 +51,7 @@ describe("referral DM body", () => {
     expect(text).not.toContain("*Stage:*")
     expect(text).not.toContain("*Recruiter:*")
     expect(text).not.toContain("Application Review")
-    expect(text).not.toContain("Martin Franco")
+    expect(text).not.toContain("Marlon Frost")
     expect(text).not.toContain("h in stage")
   })
 
